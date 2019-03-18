@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+<title>Un blog sur des trucs et astuces de dev, orienté front-end
+</title>
+<meta name="description" content="Un blog sur des trucs et astuces de dev, orienté front-end
+">
+<meta name="keywords" content="">
+<!-- Twitter Card and Open Graph tags -->
+<meta name="twitter:title" content="Retrouver sa clé d'activation Windows sous Linux &#8211; ">
+<meta name="twitter:description" content="Un blog sur des trucs et astuces de dev, orienté front-end
+">
+<meta name="twitter:creator" content="@MelanieBWeb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image:src" content="http://localhost:4000/images/logo.png">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Retrouver sa clé d'activation Windows sous Linux &#8211; ">
+<meta property="og:description" content="Un blog sur des trucs et astuces de dev, orienté front-end
+">
+<meta property="og:url" content="http://localhost:4000/2019/03/11/retrouver-sa-cl%C3%A9-d-activation-windows-sous-linux.html">
+<meta property="og:site_name" content="">
+
+<!-- Webmaster Tools verfication -->
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/2019/03/11/retrouver-sa-cl%C3%A9-d-activation-windows-sous-linux.html">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/main.min.css" type="text/css" />
+
+
+</head>
+<body>
+  <div class="header-container container">
+  <header>
+    <a href="http://localhost:4000" class="top-link">Une dev qui aime (re)découvrir des choses</a>
+      <ul class="nav">
+        <!--Change the  URL here if working on an absolute domain-->
+        <li><a href="http://localhost:4000">Accueil</a></li>
+        <li><a href="http://localhost:4000/about">A propos</a></li>
+        <li><a href="http://localhost:4000/feed.xml">RSS</a></li>
+      </ul>
+  </header>
+</div>
+
+  <div class="container">
+  <h2 style="margin-bottom: -20px;">Retrouver sa clé d'activation Windows sous Linux</h2>
+<p class="post-date">11 Mar 2019</p>
+
+<div class="post">
+<p>Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.</p>
+
+<p>Mais souvent aussi, on préfère passer sous une distribution Linux, et on écrase totalement le Windows installé.
+Et si nous souhaitons ensuite réinstaller notre Windows, nous n’avons pas la clé d’activation.</p>
+
+<p>Pour récupérer la clé d’activation sous Linux, c’est possible avec cette commande :</p>
+
+<p><code class="highlighter-rouge">sudo tail -c +56 /sys/firmware/acpi/tables/MSDM</code></p>
+
+<p>Plutôt pratique :)</p>
+
+</div>
+
+<a class="twitter-share-button"
+   href="https://twitter.com/intent/tweet?text=Retrouver sa clé d'activation Windows sous Linux"
+   data-hashtags=""
+   data-via=""
+   data-size="large">Tweet</a>
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+
+
+
+
+  
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+  </div><!-- /.main -->
+</body>
+</html>

@@ -1,0 +1,36 @@
+name: Une dev qui aime (re)découvrir des choses
+description: >
+    Un blog sur des trucs et astuces de dev, orienté front-end
+about: >
+    Développeuse web qui garde et partage des info sur ce blog
+
+master_repo: false
+url: "https://melanie-b.github.io/blog"
+markdown: kramdown
+highlighter: rouge
+
+plugins: ['jekyll-paginate', 'jekyll-gist', 'jekyll-feed']
+
+paginate: 4
+
+logo:             logo.png
+disqus_shortname:
+
+rtl: false
+owner:
+  name:           melanie-b
+  avatar:         "http://melanie.boudard.free.fr/images/photo_3.jpg"
+  email:          
+  # Social networking links used in footer. Update and remove as you like.
+  twitter: MelanieBWeb
+  github: https://github.com/melanie-b
+  githubpro: https://github.com/melaniemeb
+  stackexchange:
+  linkedin:
+  # For Google Authorship https://plus.google.com/authorship
+  google_plus:
+
+# Analytics and webmaster tools stuff goes here
+google_analytics:
+google_verify:
+bing_verify:
