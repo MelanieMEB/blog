@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-{% if site.rtl %}
-<html dir="rtl">
-{% else %}
-<html>
-{% endif %}
-<head>
+<!--
+    Type on Strap jekyll theme v2.0.0
+    Copyright 2016-2019 Sylhare
+    Theme free for personal and commercial use under the MIT license
+    https://github.com/sylhare/Type-on-Strap/blob/master/LICENSE
+-->
+<html lang="en">
   {% include head.html %}
-</head>
-<body>
-  {% include header.html %}
-  <div class="container">
-  {{ content }}
-
-  {% include footer.html %}
-  </div><!-- /.main -->
-</body>
+  <body>
+    {% include navbar.html %}
+    <div class="content">
+      {{ content }}
+    </div>
+    {% include footer.html %}
+  </body>
 </html>

@@ -1,0 +1,20 @@
+---
+layout: page
+title: À propos
+permalink: /about/
+feature-img: "assets/img/tea-about.jpg"
+tags: [Blog]
+---
+
+J'ai écrit ce blog pour partager avec qui le souhaite des découvertes, redécouvertes, connaissances et tips sur le métier de développeur. Je partagerais autant des connaissances techniques que méthodologique.
+C'est aussi pour moi l'occasion d'avoir un endroit pour garder en mémoire tout ce que je découvre et que j'apprends.
+
+- Pourquoi le thé est aussi présent sur ce blog ? Parce que j'aime ça ! 
+
+Ce blog a été créé via [Jekyll](http://jekyllrb.com/)  (sous license MIT) et utilise le thème [Type on Strap](https://github.com/sylhare/Type-on-Strap).
+
+
+Favicon et logo : Tea by Oleg Frolov from the Noun Project
+Les photographies proviennent du site Unplash et ont été prise par Adeolu Eletu, Igor Miske, Dustin Lee et Christian Wiediger.
+
+ 

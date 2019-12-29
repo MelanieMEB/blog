@@ -1,113 +1,338 @@
 <!DOCTYPE html>
+<!--
+    Type on Strap jekyll theme v2.0.0
+    Copyright 2016-2019 Sylhare
+    Theme free for personal and commercial use under the MIT license
+    https://github.com/sylhare/Type-on-Strap/blob/master/LICENSE
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<html>
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
 
-<head>
-  <meta charset="utf-8">
-<title>Un blog sur des trucs et astuces de dev, orienté front-end
-</title>
-<meta name="description" content="Un blog sur des trucs et astuces de dev, orienté front-end
-">
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/blog/assets/favicon.ico" type="image/x-icon">
 
-<!-- Twitter Card and Open Graph tags -->
-<meta name="twitter:title" content="A guide to your digital life &#8211; ">
-<meta name="twitter:description" content="Un blog sur des trucs et astuces de dev, orienté front-end
-">
-<meta name="twitter:creator" content="@MelanieBWeb">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image:src" content="http://localhost:4000/images/logo.png">
-<meta property="og:type" content="article">
-<meta property="og:title" content="A guide to your digital life &#8211; ">
-<meta property="og:description" content="Un blog sur des trucs et astuces de dev, orienté front-end
-">
-<meta property="og:url" content="http://localhost:4000/">
-<meta property="og:site_name" content="">
+    <!-- Canonical -->
+    <link rel="canonical" href="http://localhost:4000/blog/">
 
-<!-- Webmaster Tools verfication -->
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="Blog d'une développeuse" href="http://localhost:4000/blog/feed.xml"/>
+    
+    
 
+    <!-- KaTeX 0.8.3 -->
+    <!-- if you have any issue check https://github.com/KaTeX/KaTeX -->
+    
+    <script src="/blog/assets/js/vendor/katex.min.js"></script>
+    
 
+    <!-- Google Analytics -->
+     <!-- End Google Analytics -->
 
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Blog d’une développeuse | Transforme le thé en code</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Blog d’une développeuse" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Transforme le thé en code" />
+<meta property="og:description" content="Transforme le thé en code" />
+<link rel="canonical" href="http://localhost:4000/blog/" />
+<meta property="og:url" content="http://localhost:4000/blog/" />
+<meta property="og:site_name" content="Blog d’une développeuse" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/blog/","name":"Blog d’une développeuse","description":"Transforme le thé en code","@type":"WebSite","headline":"Blog d’une développeuse","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
 
-<link rel="canonical" href="http://localhost:4000/">
-<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
-
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="https://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet">
-
-
-<link rel="stylesheet" href="/css/main.min.css" type="text/css" />
-
-
+    <!-- Manual seo tags -->
+    <!--
+    <title> Blog d'une développeuse</title>
+    <meta name="description" content="Transforme le thé en code">
+    -->
 </head>
-<body>
-  <div class="header-container container">
-  <header>
-    <a href="http://localhost:4000" class="top-link">Une dev qui aime (re)découvrir des choses</a>
-      <ul class="nav">
-        <!--Change the  URL here if working on an absolute domain-->
-        <li><a href="http://localhost:4000">Accueil</a></li>
-        <li><a href="http://localhost:4000/about">A propos</a></li>
-        <li><a href="http://localhost:4000/feed.xml">RSS</a></li>
-      </ul>
-  </header>
-</div>
 
-  <div class="container">
-  <div class="listing">
+  <body>
+    <header class="site-header">
+
+    <!-- Logo and title -->
+	<div class="branding">
+        
+		<a href="/blog/">
+			<img alt="logo img" class="avatar" src="/blog/assets/img/profil.png" />
+		</a>
+        
+
+		<h1 class="site-title">
+			<a aria-label="Blog d'une développeuse" href="/blog/">
+        Blog d'une développeuse
+      </a>
+		</h1>
+	</div>
+
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a aria-label="pull" id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+
+    <!-- Menu -->
+    <ul class="hide">
+        
+
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="À propos" title="À propos" href="/blog/about/">
+                     À propos 
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Recherche" title="Recherche" href="/blog/search/">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" aria-label="Tags" title="Tags" href="/blog/tags/">
+                     <i class="fa fa-tags" aria-hidden="true"></i>
+                    
+                </a>
+            </li>
+            
+            
+        
+            
+            
+        
+    </ul>
+
+	</nav>
+</header>
+
+    <div class="content">
+      <div class="home">
+
+  <div id="main" class="call-out"
+       style="background-image: url('/blog/assets/img/tea-computer.jpg')">
+    <h1> Mélanie, transforme le thé en code </h1>
+  </div>
+
+  <div class="posts">
     
-    <div class="post other link">
-      <h2></span> <a href="http://localhost:4000/2019/03/11/retrouver-sa-cl%C3%A9-d-activation-windows-sous-linux.html">Retrouver sa clé d'activation Windows sous Linux</a></h2>
-      <p class="post-date">11 Mar 2019</p>
-      <p>Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.</p>
+    <div class="post-teaser">
+        
+        <span>
+          <header>
+            <h1>
+              <a aria-label="Tips CSS: les descendants selectors" class="post-link" href="/blog/2019/12/29/css-descendants-selectors-copy-2.html">
+                Tips CSS: les descendants selectors
+              </a>
+            </h1>
+            
 
 
+<div class="post-info">
+    <p class="meta">
+      December 29, 2019
+    </p></div>
+
+          </header>
+          
+              <div class="excerpt">
+                  
+                     Cet article fait suite à l’article source, 
+et j’ai souhaité noter certaines informations que j’ai trouvé utiles.
+
+                  
+              </div>
+          
+      </span>
     </div>
     
-    <div class="post other link">
-      <h2></span> <a href="http://localhost:4000/2019/03/11/presentation.html">Un nouveau blog</a></h2>
-      <p class="post-date">11 Mar 2019</p>
-      <p>Bienvenue sur ce blog, un peu perso et pour partager !</p>
+    <div class="post-teaser">
+        
+        <span>
+          <header>
+            <h1>
+              <a aria-label="Retrouver sa clé d'activation Windows sous Linux" class="post-link" href="/blog/2019/12/29/cle-windows-sous-linux.html">
+                Retrouver sa clé d'activation Windows sous Linux
+              </a>
+            </h1>
+            
 
 
+<div class="post-info">
+    <p class="meta">
+      December 29, 2019
+    </p></div>
+
+          </header>
+          
+              <div class="excerpt">
+                  
+                     Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.
+
+                  
+              </div>
+          
+      </span>
+    </div>
+    
+    <div class="post-teaser">
+        
+        <span>
+          <header>
+            <h1>
+              <a aria-label="Ouverture du blog" class="post-link" href="/blog/2019/12/28/presentation.html">
+                Ouverture du blog
+              </a>
+            </h1>
+            
+
+
+<div class="post-info">
+    <p class="meta">
+      December 28, 2019
+    </p></div>
+
+          </header>
+          
+              <div class="excerpt">
+                  
+                     Ca y est, le blog est lancé ! 
+C’est toujours difficile de se lancer dans ce type d’aventure. Si je le fais, c’est surtout pour garder de nombreuses informations au même endroit, et pouvoir les partager.
+
+                  
+              </div>
+          
+      </span>
     </div>
     
 </div>
 
 
-  
 
-<!-- Pagination links -->
-<div class="pagination">
-  
-  
-    
-    <a href="https://twitter.com/MelanieBWeb" target="_blank" class="social-media-icons"><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></a>
-  
-    
-    <a href="https://github.com/melaniemeb" target="_blank" class="social-media-icons"><i class="fa fa-2x fa-github-square" aria-hidden="true"></i></a>
-  
-  
 
-  
-    <span class="next"><span class="mega-octicon octicon-playback-rewind" style="min-width: 32px;"></span></span>
-  
-  
-    <span class="previous"><span class="mega-octicon octicon-playback-fast-forward" style="min-width: 32px;"></span></span>
-  
+    
 </div>
 
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '']);
-  _gaq.push(['_trackPageview']);
-  (function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
+    </div>
+    <footer class="site-footer">
+    <p class="text">
+        Construit avec <a href="https://jekyllrb.com/">Jekyll</a> et le thème <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
 
-  </div><!-- /.main -->
-</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a href="https://github.com/MelanieMEB" title="Suivre GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+<li>
+    <a href="https://www.linkedin.com/in/m%C3%A9lanie-boudard-0364b521/" title="Suivre LinkedIn">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+    <a class="type" href="https://twitter.com/MelanieBWeb"
+       title="Suivre Twitter">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+  </body>
 </html>

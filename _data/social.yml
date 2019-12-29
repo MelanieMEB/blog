@@ -1,0 +1,36 @@
+# Icons on the footer
+rss: false         # Make sure you created a feed.xml with feed.xml layout
+email_address:    # Full email address, e.g. "sam@example.com"
+behance:
+bitbucket:
+dribbble:
+facebook:
+flickr:
+gitlab:
+github: "MelanieMEB"
+instagram:
+keybase:
+linkedin: "https://www.linkedin.com/in/m%C3%A9lanie-boudard-0364b521/"
+pinterest:
+reddit:
+soundcloud:
+stack_overflow:
+stack_exchange:   # Full URL
+steam:
+tumblr:
+twitter: "MelanieBWeb"
+vimeo:
+wordpress:
+youtube:
+
+# Share button options
+share:
+  facebook: false
+  twitter: true
+  tumblr: false
+  pinterest: false
+  pocket: true
+  reddit: true
+  linkedin: false
+  wordpress: false
+  email: true

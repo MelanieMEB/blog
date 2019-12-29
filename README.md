@@ -1,6 +1,6 @@
 # Melanie-b blog
 
-**Melanie-b blog** est construit grâce à Jekyll avec le theme [white-paper](https://github.com/vinitkumar/white-paper).
+**Melanie-b blog** est construit grâce à Jekyll avec le theme [type-on-strap](https://github.com/Sylhare/Type-on-Strap).
 
 ## Installation
 
@@ -27,6 +27,8 @@ Le layout des articles est de la forme :
 ```---
 layout: post
 title: <Titre de l'article>
-date: <Date de l'article>
+tags: [Tag1, Tag2]
+color: <Une couleur pour afficher sur le titre>
+feature-img: <Une image à afficher sous le titre>
 ---
 ```
