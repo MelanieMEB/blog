@@ -14,7 +14,8 @@ C'est aussi pour moi l'occasion d'avoir un endroit pour garder en mémoire tout 
 Ce blog a été créé via [Jekyll](http://jekyllrb.com/)  (sous license MIT) et utilise le thème [Type on Strap](https://github.com/sylhare/Type-on-Strap).
 
 
-Favicon et logo : Tea by Oleg Frolov from the Noun Project
-Les photographies proviennent du site Unplash et ont été prise par Adeolu Eletu, Igor Miske, Dustin Lee et Christian Wiediger.
+Favicon et logo : Tea by Oleg Frolov du site [the Noun Project](https://thenounproject.com/).
+
+Les photographies proviennent du site [Unplash](https://unsplash.com/) et ont été prises par [Adeolu Eletu](https://unsplash.com/@adeolueletu), [Igor Miske](https://unsplash.com/@igormiske), [Dustin Lee](https://unsplash.com/@dustinlee) et [Christian Wiediger](https://unsplash.com/@christianw).
 
  
