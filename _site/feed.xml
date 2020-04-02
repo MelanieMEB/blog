@@ -1,4 +1,159 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2019-12-29T18:17:34+01:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Tips CSS: les descendants selectors</title><link href="http://localhost:4000/blog/2019/12/29/css-descendants-selectors-copy-2.html" rel="alternate" type="text/html" title="Tips CSS: les descendants selectors" /><published>2019-12-29T00:00:00+01:00</published><updated>2019-12-29T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/29/css-descendants-selectors%20copy%202</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/29/css-descendants-selectors-copy-2.html">&lt;p&gt;&lt;em&gt;Cet article fait suite à l’article &lt;a href=&quot;https://medium.com/@devdevcharlie/things-nobody-ever-taught-me-about-css-5d16be8d5d0e&quot;&gt;source&lt;/a&gt;, 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2020-04-02T16:35:40+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Le Console.log et ses déclinaisons</title><link href="http://localhost:4000/blog/2020/04/02/use-console-log.html" rel="alternate" type="text/html" title="Le Console.log et ses déclinaisons" /><published>2020-04-02T00:00:00+02:00</published><updated>2020-04-02T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/04/02/use-console-log</id><content type="html" xml:base="http://localhost:4000/blog/2020/04/02/use-console-log.html">&lt;p&gt;L’utilisation des &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt; est l’une des approches pour débugger les plus utilisées par les développeurs. La majorité du temps, seule la méthode &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt; est utilisée, alors qu’une palette d’autres possibilités est offertes au développeurs.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Pour voir ces méthodes en action, un &lt;a href=&quot;https://codepen.io/melanie_b/pen/abOxWBw&quot;&gt;CodePen&lt;/a&gt; est disponible. Il faut utiliser la console du navigateur et non celle de CodePen pour voir les résultats.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;préciser-le-type-du-message&quot;&gt;Préciser le type du message&lt;/h1&gt;
+
+&lt;p&gt;Le &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt; est suffisant pour afficher du texte ou des données. Mais si vous souhaitez être plus précis dans vos informations de console, vous pouvez utiliser :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Pour afficher un message.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Pour afficher une information.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;warn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Pour afficher un warning.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Pour afficher une erreur.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;les-possibilités-du-consolelog&quot;&gt;Les possibilités du console.log&lt;/h1&gt;
+
+&lt;p&gt;La méthode &lt;code class=&quot;highlighter-rouge&quot;&gt;log&lt;/code&gt; permet d’utiliser des caractères de substitution ou encore d’ajouter du style.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Afficher une string %s &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Afficher un entier %i &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Afficher un nombre réel %f &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;%c Afficher ce texte avec du style &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;background: black; color: yellow;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;em&gt;Pour afficher un objet dans un console.log, il sera souvent recommandé d’utiliser &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log(JSON.parse(JSON.stringify(obj)))&lt;/code&gt; pour s’assurer de voir la valeur de l’objet au moment de l’appel à &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;nettoyer-la-console&quot;&gt;Nettoyer la Console&lt;/h1&gt;
+
+&lt;p&gt;Si trop de messages s’accumulent dans la console, un &lt;code class=&quot;highlighter-rouge&quot;&gt;console.clear()&lt;/code&gt; permet d’effacer les précédents messages.&lt;/p&gt;
+
+&lt;h1 id=&quot;quelle-méthode-utiliser-pour-les-array-object-ou-encore-le-dom-&quot;&gt;Quelle méthode utiliser pour les Array, Object ou encore le DOM ?&lt;/h1&gt;
+
+&lt;p&gt;Pour afficher des Array, des Object ou des DOM, il y a trois méthodes à regarder :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;console.log()&lt;/code&gt; qui retourne l’objet représenté en chaîne de caractère;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;console.dir()&lt;/code&gt; qui retourne l’objet;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;console.table()&lt;/code&gt; qui va afficher un tableau dans la console avec les valeurs.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Dans le cas d’un Array ou d’un Object, il peut être utile d’utiliser &lt;code class=&quot;highlighter-rouge&quot;&gt;console.table()&lt;/code&gt; pour avoir la vision tableau dans la console, ce qui peut faciliter la lecture pour de petits tableaux ou objets.
+La différence entre &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log()&lt;/code&gt; et &lt;code class=&quot;highlighter-rouge&quot;&gt;console.dir()&lt;/code&gt; est à garder en tête, et il serait utile de prendre l’habitude d’utiliser &lt;code class=&quot;highlighter-rouge&quot;&gt;console.dir()&lt;/code&gt; dans ces cas-là.&lt;/p&gt;
+
+&lt;p&gt;Dans le cas du DOM, il est possible d’utiliser &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log()&lt;/code&gt; et &lt;code class=&quot;highlighter-rouge&quot;&gt;console.dir()&lt;/code&gt;. Sous Firefox, les deux méthodes renvoient un objet de type JSON avec toutes les informations de l’élément visé. Par contre, le comportement est différent sous Chrome : &lt;code class=&quot;highlighter-rouge&quot;&gt;console.dir()&lt;/code&gt; a le même comportement, mais  &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt; renvoie un arbre HTML.&lt;/p&gt;
+
+&lt;h1 id=&quot;pouvoir-suivre-ce-qui-se-passe-dans-le-code&quot;&gt;Pouvoir suivre ce qui se passe dans le code&lt;/h1&gt;
+
+&lt;h2 id=&quot;quand-jai-besoin-de-compter&quot;&gt;Quand j’ai besoin de compter&lt;/h2&gt;
+
+&lt;p&gt;La méthode &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt; permet de compter le nombre de fois où cette méthode a été appelé. Il est possible d’ajouter un label pour suivre le comptage.&lt;/p&gt;
+
+&lt;p&gt;Par exemple :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Compteur &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;va afficher en console :&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Compteur : 1
+Compteur : 2
+Compteur : 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;La méthode &lt;code class=&quot;highlighter-rouge&quot;&gt;console.countReset()&lt;/code&gt; permet de remettre à zéro notre compteur.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;quand-jai-besoin-de-la-stack-trace&quot;&gt;Quand j’ai besoin de la stack trace&lt;/h2&gt;
+
+&lt;p&gt;Pour avoir la stack trace, il y a une méthode, pour ça : &lt;code class=&quot;highlighter-rouge&quot;&gt;console.trace()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Par exemple :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;firstFunction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;secondFunction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;secondFunction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;firstFunction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;va afficher en console :&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;console.trace
+secondFunction @ index.js:4
+firstFunction @ index.js:6
+(anonymous) @ index.js:8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;quand-je-veux-faire-des-vérifications&quot;&gt;Quand je veux faire des vérifications&lt;/h2&gt;
+
+&lt;p&gt;Il est possible de faire des assertions directement via une méthode &lt;code class=&quot;highlighter-rouge&quot;&gt;console.assert()&lt;/code&gt;. Cette méthode affichera le résultat seulement si l’assertion est fause.&lt;/p&gt;
+
+&lt;p&gt;Par exemple :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;variable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;variable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;La variable doit être 2, mais elle a comme valeur : &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;variable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;La variable doit être 3, mais elle a comme valeur : &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;va afficher en console :&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Assertion failed: La variable doit être 2, mais elle a comme valeur : 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;quand-jai-besoin-de-mesurer-le-temps-passé&quot;&gt;Quand j’ai besoin de mesurer le temps passé&lt;/h2&gt;
+
+&lt;p&gt;Une approche souvent utilisé pour connaître le temps entre deux moments du code est de créer deux &lt;em&gt;timestamps&lt;/em&gt; et de faire une comparaison, qui serait affiché alors avec un &lt;em&gt;console.log&lt;/em&gt;.
+Pourtant, il existe des méthodes pour faire ça plus facilement : &lt;code class=&quot;highlighter-rouge&quot;&gt;console.time()&lt;/code&gt; pour lancer le timer et &lt;code class=&quot;highlighter-rouge&quot;&gt;console.timeEnd()&lt;/code&gt;.
+Il est possible de préciser un label dans ces méthodes pour pouvoir le nommer et lancer plusieurs timer différents.&lt;/p&gt;
+
+&lt;h1 id=&quot;grouper-mes-consolelog-pour-une-meilleure-visibilité&quot;&gt;Grouper mes console.log pour une meilleure visibilité&lt;/h1&gt;
+
+&lt;p&gt;Si vous aimez avoir un affichage clair et hiérarchisé, vous pouvez grouper les informations que vous remontez via les méthodes de &lt;code class=&quot;highlighter-rouge&quot;&gt;console&lt;/code&gt; en utilisant &lt;code class=&quot;highlighter-rouge&quot;&gt;console.group()&lt;/code&gt; pour grouper les prochains messages jusqu’à l’appel de &lt;code class=&quot;highlighter-rouge&quot;&gt;console.groupEnd()&lt;/code&gt;. Il existe aussi &lt;code class=&quot;highlighter-rouge&quot;&gt;console.groupCollapsed()&lt;/code&gt; pour afficher le groupe réduit dans la console. Ces méthodes prennent aussi des labels pour pouvoir nommer les groupes.&lt;/p&gt;
+
+&lt;p&gt;Par exemple :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Groupe A&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;warn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Message 1 de A&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Message 2 de A&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;groupCollapsed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Groupe B&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Message 1 de B&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Message 2 de B&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;groupEnd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Message 3 de A&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;groupEnd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;va afficher en console :&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Groupe A
+- Message 1 de A
+- Message 2 de A
+- Groupe B
+- Message 3 de A
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Il faudra déployer le groupe B pour pouvoir voir ses messages.&lt;/p&gt;
+
+&lt;h1 id=&quot;créer-un-profil-de-performance&quot;&gt;Créer un profil de performance&lt;/h1&gt;
+
+&lt;p&gt;Si vous avez besoin d’analyser la performance de votre code, il est possible d’enregistrement un profil de performance, visible dans les outils de performance de Firefox.
+Pour lancer l’enregistrement, il faut appeler &lt;code class=&quot;highlighter-rouge&quot;&gt;console.profile('Label du profil')&lt;/code&gt;, et appeler ensuite &lt;code class=&quot;highlighter-rouge&quot;&gt;console.profileEnd('Label du profil')&lt;/code&gt; pour l’arrêter.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Attention, cette méthode n’est pas standard. Éviter de l’oublier dans le code :)&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;ce-que-je-retiens&quot;&gt;Ce que je retiens&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;console.table&lt;/code&gt; offre vraiment une vision utile dans certains cas ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;console.dir&lt;/code&gt; devrait être plus souvent utilisé sur les Array ou Object ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;console.time&lt;/code&gt; permet d’éviter de faire des &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt; avec des dates pour mesurer le temps ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;console.assert&lt;/code&gt; permet d’éviter d’afficher des informations seulement pour vérifier ce qui est attendu.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="JS" /><category term="debug" /><summary type="html">L’utilisation des console.log est l’une des approches pour débugger les plus utilisées par les développeurs. La majorité du temps, seule la méthode console.log est utilisée, alors qu’une palette d’autres possibilités est offertes au développeurs.</summary></entry><entry><title type="html">Retrouver sa clé d’activation Windows sous Linux</title><link href="http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux.html" rel="alternate" type="text/html" title="Retrouver sa clé d'activation Windows sous Linux" /><published>2019-12-29T00:00:00+01:00</published><updated>2019-12-29T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux.html">&lt;p&gt;Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.&lt;/p&gt;
+
+&lt;p&gt;Mais souvent aussi, on préfère passer sous une distribution Linux, et on écrase totalement le Windows installé.
+Et si nous souhaitons ensuite réinstaller notre Windows, nous n’avons pas la clé d’activation.&lt;/p&gt;
+
+&lt;p&gt;Pour récupérer la clé d’activation sous Linux, c’est possible avec cette commande :&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo tail -c +56 /sys/firmware/acpi/tables/MSDM&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Plutôt pratique :)&lt;/p&gt;</content><author><name></name></author><category term="Windows" /><category term="Linux" /><summary type="html">Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.</summary></entry><entry><title type="html">Tips CSS: les descendants selectors</title><link href="http://localhost:4000/blog/2019/12/29/css-descendants-selectors.html" rel="alternate" type="text/html" title="Tips CSS: les descendants selectors" /><published>2019-12-29T00:00:00+01:00</published><updated>2019-12-29T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/29/css-descendants-selectors</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/29/css-descendants-selectors.html">&lt;p&gt;&lt;em&gt;Cet article fait suite à l’article &lt;a href=&quot;https://medium.com/@devdevcharlie/things-nobody-ever-taught-me-about-css-5d16be8d5d0e&quot;&gt;source&lt;/a&gt;, 
 et j’ai souhaité noter certaines informations que j’ai trouvé utiles.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Les &lt;em&gt;descendant selectors&lt;/em&gt; permettent de préciser que le sélecteur souhaité doit être pris en compte s’il est sous un autre sélecteur précis.
@@ -17,16 +172,7 @@ On les écrit en les pensant de gauche à droite, mais ils sont lus de droite à
 &lt;/ul&gt;
 
 &lt;p&gt;Cet ordre contre-intuitif peut expliquer des lenteurs sur le site.
-De plus, c’est une autre raison pour créer des classes spécifiques plutôt que d’enchaîner des sélecteurs.&lt;/p&gt;</content><author><name></name></author><category term="CSS" /><summary type="html">Cet article fait suite à l’article source, et j’ai souhaité noter certaines informations que j’ai trouvé utiles.</summary></entry><entry><title type="html">Retrouver sa clé d’activation Windows sous Linux</title><link href="http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux.html" rel="alternate" type="text/html" title="Retrouver sa clé d'activation Windows sous Linux" /><published>2019-12-29T00:00:00+01:00</published><updated>2019-12-29T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux.html">&lt;p&gt;Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.&lt;/p&gt;
-
-&lt;p&gt;Mais souvent aussi, on préfère passer sous une distribution Linux, et on écrase totalement le Windows installé.
-Et si nous souhaitons ensuite réinstaller notre Windows, nous n’avons pas la clé d’activation.&lt;/p&gt;
-
-&lt;p&gt;Pour récupérer la clé d’activation sous Linux, c’est possible avec cette commande :&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo tail -c +56 /sys/firmware/acpi/tables/MSDM&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Plutôt pratique :)&lt;/p&gt;</content><author><name></name></author><category term="Windows" /><category term="Linux" /><summary type="html">Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.</summary></entry><entry><title type="html">Ouverture du blog</title><link href="http://localhost:4000/blog/2019/12/28/presentation.html" rel="alternate" type="text/html" title="Ouverture du blog" /><published>2019-12-28T00:00:00+01:00</published><updated>2019-12-28T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/28/presentation</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/28/presentation.html">&lt;p&gt;Ca y est, le blog est lancé ! 
+De plus, c’est une autre raison pour créer des classes spécifiques plutôt que d’enchaîner des sélecteurs.&lt;/p&gt;</content><author><name></name></author><category term="CSS" /><summary type="html">Cet article fait suite à l’article source, et j’ai souhaité noter certaines informations que j’ai trouvé utiles.</summary></entry><entry><title type="html">Ouverture du blog</title><link href="http://localhost:4000/blog/2019/12/28/presentation.html" rel="alternate" type="text/html" title="Ouverture du blog" /><published>2019-12-28T00:00:00+01:00</published><updated>2019-12-28T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/28/presentation</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/28/presentation.html">&lt;p&gt;Ca y est, le blog est lancé ! 
 C’est toujours difficile de se lancer dans ce type d’aventure. Si je le fais, c’est surtout pour garder de nombreuses informations au même endroit, et pouvoir les partager.&lt;/p&gt;
 
 &lt;p&gt;On va parler ici de développement web, mais pas que !&lt;/p&gt;</content><author><name></name></author><category term="Blog" /><summary type="html">Ca y est, le blog est lancé ! C’est toujours difficile de se lancer dans ce type d’aventure. Si je le fais, c’est surtout pour garder de nombreuses informations au même endroit, et pouvoir les partager.</summary></entry></feed>

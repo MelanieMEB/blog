@@ -1,0 +1,20 @@
+<p><em>Cet article fait suite à l’article <a href="https://medium.com/@devdevcharlie/things-nobody-ever-taught-me-about-css-5d16be8d5d0e">source</a>, 
+et j’ai souhaité noter certaines informations que j’ai trouvé utiles.</em></p>
+
+<p>Les <em>descendant selectors</em> permettent de préciser que le sélecteur souhaité doit être pris en compte s’il est sous un autre sélecteur précis.
+On les écrit en les pensant de gauche à droite, mais ils sont lus de droite à gauche.</p>
+
+<p>Lorsqu’on sélectionne :</p>
+<pre><code class="language-CSS">.menu li a {
+
+}
+</code></pre>
+<p>On cherchera d’abord :</p>
+<ul>
+  <li>Tous les liens <code class="highlighter-rouge">&lt;a&gt;</code></li>
+  <li>Puis, de ces liens, ceux étant au sein d’une liste <code class="highlighter-rouge">li</code></li>
+  <li>Enfin, on regardera ceux appartenant au bloc <code class="highlighter-rouge">.menu</code></li>
+</ul>
+
+<p>Cet ordre contre-intuitif peut expliquer des lenteurs sur le site.
+De plus, c’est une autre raison pour créer des classes spécifiques plutôt que d’enchaîner des sélecteurs.</p>
