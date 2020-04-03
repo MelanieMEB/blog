@@ -3,9 +3,9 @@ baseurl: "/blog"
 url: "https://melaniemeb.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
-title: "Blog d'une développeuse"           # site's title
+title: "Blog d'une développeuse - Mélanie B."           # site's title
 description: "Transforme le thé en code"              # used by search engines
-avatar: assets/img/profil.png                         # Empty for no avatar in navbar
+avatar: assets/img/profil.jpg                         # Empty for no avatar in navbar
 favicon: assets/favicon.ico                           # Icon displayed in the tab
 
 # Header and footer text
