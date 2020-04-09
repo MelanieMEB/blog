@@ -29,7 +29,19 @@ div { color: blue; }
 
 affichera "<span style='color:blue'> Ceci est un titre </span>" en bleu, car le sélecteur modifiant le texte en bleu est *après* celui modifiant le texte en rouge : l'ordre est pris en compte.
  
-Alors que le cas :
+L'ordre à prendre en compte est celui du fichier CSS. Dans le cas suivant : 
+
+{% highlight css %}
+.blue { color: blue; }
+.red { color: red; }
+{% endhighlight %}
+{% highlight html %}
+<span class="blue red"> Texte </span>
+<span class="red blue"> Texte </span>
+{% endhighlight %}
+Les deux textes seront en rouge car l'ordre dans l'attribut `class` n'a pas d'impact sur la résolution du conflit. Seul l'ordre dans le fichier CSS est pris en compte.
+
+Regardons maintenant le mot-clé `!important` :
 {% highlight css %}
 div { color: red !important; }
 div { color: blue; }
