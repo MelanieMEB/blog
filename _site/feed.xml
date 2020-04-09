@@ -1,4 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2020-04-03T09:26:48+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse - Mélanie B.</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Le Console.log et ses déclinaisons</title><link href="http://localhost:4000/blog/2020/04/02/use-console-log.html" rel="alternate" type="text/html" title="Le Console.log et ses déclinaisons" /><published>2020-04-02T00:00:00+02:00</published><updated>2020-04-02T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/04/02/use-console-log</id><content type="html" xml:base="http://localhost:4000/blog/2020/04/02/use-console-log.html">&lt;p&gt;L’utilisation des &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt; est l’une des approches pour débugger les plus utilisées par les développeurs. La majorité du temps, seule la méthode &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt; est utilisée, alors qu’une palette d’autres possibilités est offertes au développeurs.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2020-04-09T11:51:39+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse - Mélanie B.</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Les conflits CSS</title><link href="http://localhost:4000/blog/2020/04/09/css-priority-rules.html" rel="alternate" type="text/html" title="Les conflits CSS" /><published>2020-04-09T00:00:00+02:00</published><updated>2020-04-09T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/04/09/css-priority-rules</id><content type="html" xml:base="http://localhost:4000/blog/2020/04/09/css-priority-rules.html">&lt;p&gt;&lt;em&gt;Dans cet article, je reviens sur un concept de base du CSS : la gestion des conflits entre deux sélecteurs. Nous parlerons entre autres du concept de spécificité.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Vous pouvez retrouver des exemples en action sur le &lt;a href=&quot;https://codepen.io/melanie_b/pen/gOaYeEE&quot;&gt;CodePen&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;css--comment-css-gère-les-conflits-entre-les-sélecteurs-&quot;&gt;CSS : Comment CSS gère les conflits entre les sélecteurs ?&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;Si deux sélecteurs CSS visent une même balise &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt;, lequel l’emporte en cas de conflit ?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;En CSS, le choix du sélecteur qui l’emporte dépend de trois facteurs :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;L’importance : utilisation du mot clé &lt;code class=&quot;highlighter-rouge&quot;&gt;!important&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;La spécificité&lt;/li&gt;
+  &lt;li&gt;L’ordre dans la source : le dernier sélecteur l’emporte&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;L’importance l’emporte sur la spécificité qui l’emporte sur l’ordre.&lt;/p&gt;
+
+&lt;p&gt;Pour une même balise &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt; Ceci est un titre &amp;lt;/div&amp;gt;&lt;/code&gt; :&lt;/p&gt;
+
+&lt;p&gt;Le cas :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;affichera “&lt;span style=&quot;color:blue&quot;&gt; Ceci est un titre &lt;/span&gt;” en bleu, car le sélecteur modifiant le texte en bleu est &lt;em&gt;après&lt;/em&gt; celui modifiant le texte en rouge : l’ordre est pris en compte.&lt;/p&gt;
+
+&lt;p&gt;Alors que le cas :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;red&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;!important&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;affichera “&lt;span style=&quot;color:red&quot;&gt; Ceci est un titre &lt;/span&gt;” en rouge, car le sélecteur modifiant le texte en rouge utilise le mot clé &lt;code class=&quot;highlighter-rouge&quot;&gt;!important&lt;/code&gt;, qui l’emporte sur l’ordre.&lt;/p&gt;
+
+&lt;p&gt;L’utilisation du mot clé &lt;code class=&quot;highlighter-rouge&quot;&gt;!important&lt;/code&gt; est très contestée : le mot-clé impose ses modifications, il est souvent le signe d’une difficulté à trouver le bon sélecteur pour le style que l’on souhaite donner.
+Je partage le point de vue que ce mot-clé ne devrait pas être utilisé.&lt;/p&gt;
+
+&lt;p&gt;Mais que faire alors quand le style que l’on veut donner ne s’affiche pas car il est annulé par un autre sélecteur, ou encore quand l’utilisation d’un framework ou d’un module nous force à utiliser &lt;code class=&quot;highlighter-rouge&quot;&gt;!important&lt;/code&gt; pour imposer notre style ?&lt;/p&gt;
+
+&lt;p&gt;Pour gérer les conflits entre les sélecteurs, il y a l’ordre et l’importance, mais aussi la spécificité.&lt;/p&gt;
+
+&lt;h1 id=&quot;la-spécificité&quot;&gt;La spécificité&lt;/h1&gt;
+
+&lt;p&gt;Le CSS a un système de points donnés à chaque sélecteur. Entre deux sélecteurs, celui avec le nombre de points le plus élevé dans la catégorie la plus haute est considéré comme plus spécifique et gagnera en cas de conflit.
+C’est le &lt;strong&gt;principe de spécificité&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Il y a 4 catégories :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Style inline (&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div style=&quot;color: blue&quot;&amp;gt;&lt;/code&gt;) : c’est la catégorie la plus élevée&lt;/li&gt;
+  &lt;li&gt;Les IDs (&lt;code class=&quot;highlighter-rouge&quot;&gt;#first-div&lt;/code&gt;) : c’est la seconde catégorie la plus élevée&lt;/li&gt;
+  &lt;li&gt;Les classes, pseudo-classes, ou attributes (&lt;code class=&quot;highlighter-rouge&quot;&gt;.class&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;:hover&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;[title]&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;Les élements ou pseudo-elements (&lt;code class=&quot;highlighter-rouge&quot;&gt;div&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;:after&lt;/code&gt;) : on retrouve ici la catégorie la plus basse.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Il y a donc 4 catégories que nous noterons de cette manière : (style inline, nombre d’ID, nombre de classes, nombre d’élément).&lt;/p&gt;
+
+&lt;p&gt;Pour chaque composant faisant partie d’une catégorie, on ajoute un point dans cette catégorie :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Style inline : (1,0,0,0)&lt;/li&gt;
+  &lt;li&gt;Un ID : (0,1,0,0)&lt;/li&gt;
+  &lt;li&gt;Une classe, une pseudo-classe ou un attribut : (0,0,1,0)&lt;/li&gt;
+  &lt;li&gt;Un élément ou un pseudo-élément : (0,0,0,1)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;quelques-exemples&quot;&gt;Quelques exemples&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.title&lt;/code&gt; : (0,0,1,0)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.title .blue&lt;/code&gt; : (0,0,2,0)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;a:hover&lt;/code&gt; : (0,0,1,1)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;a[href$='.fr']&lt;/code&gt; : (0,0,1,1)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;#global &amp;gt; .class &amp;gt; p&lt;/code&gt; : (0,1,1,1)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;div + p::first-letter&lt;/code&gt; : (0,0,0,3)&lt;/li&gt;
+  &lt;li&gt;Entre beaucoup d’éléments et une classe :&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;C’est la catégorie la plus haute qui gagne : &lt;code class=&quot;highlighter-rouge&quot;&gt;.class&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Le sélecteur universel (*) et les combinateurs (+, &amp;gt;, ~) ne changent pas le nombre de points final.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;ressources&quot;&gt;Ressources&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Un &lt;a href=&quot;https://specificity.keegan.st/&quot;&gt;calculateur de spécificité&lt;/a&gt;, pour pouvoir comparer deux sélecteurs et comprendre pourquoi l’un est plus fort que l’autre.&lt;/li&gt;
+  &lt;li&gt;Un outils pour &lt;a href=&quot;https://jonassebastianohlsson.com/specificity-graph/&quot;&gt;voir les spécificités pour tout un fichier css&lt;/a&gt;, utile pour analyser tout son fichier CSS.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Le deuxième outils est très utile si vous utilisez &lt;strong&gt;ITCSS&lt;/strong&gt; comme architecture CSS. Dans cette architecture, 
+les sélecteurs dans les fichiers CSS sont triés par spécificité, du moins fort au plus fort, et par conséquent du plus général au plus spécifique.&lt;/em&gt;&lt;/p&gt;</content><author><name></name></author><category term="CSS" /><summary type="html">Dans cet article, je reviens sur un concept de base du CSS : la gestion des conflits entre deux sélecteurs. Nous parlerons entre autres du concept de spécificité.</summary></entry><entry><title type="html">Le Console.log et ses déclinaisons</title><link href="http://localhost:4000/blog/2020/04/02/use-console-log.html" rel="alternate" type="text/html" title="Le Console.log et ses déclinaisons" /><published>2020-04-02T00:00:00+02:00</published><updated>2020-04-02T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/04/02/use-console-log</id><content type="html" xml:base="http://localhost:4000/blog/2020/04/02/use-console-log.html">&lt;p&gt;L’utilisation des &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt; est l’une des approches pour débugger les plus utilisées par les développeurs. La majorité du temps, seule la méthode &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt; est utilisée, alors qu’une palette d’autres possibilités est offertes au développeurs.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Pour voir ces méthodes en action, un &lt;a href=&quot;https://codepen.io/melanie_b/pen/abOxWBw&quot;&gt;CodePen&lt;/a&gt; est disponible. Il faut utiliser la console du navigateur et non celle de CodePen pour voir les résultats.&lt;/em&gt;&lt;/p&gt;
 
