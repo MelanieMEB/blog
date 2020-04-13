@@ -16,4 +16,4 @@ Ce blog a été créé via [Jekyll](http://jekyllrb.com/)  (sous license MIT) et
 
 Favicon et logo : Tea by Oleg Frolov du site [the Noun Project](https://thenounproject.com/).
 
-Les photographies proviennent du site [Unplash](https://unsplash.com/) et ont été prises par [Adeolu Eletu](https://unsplash.com/@adeolueletu), [Igor Miske](https://unsplash.com/@igormiske), [Dustin Lee](https://unsplash.com/@dustinlee), [KOBU Agency](https://unsplash.com/@kobuagency) et [Christian Wiediger](https://unsplash.com/@christianw).
+Les photographies proviennent du site [Unplash](https://unsplash.com/) et ont été prises par [Adeolu Eletu](https://unsplash.com/@adeolueletu), [Igor Miske](https://unsplash.com/@igormiske), [Dustin Lee](https://unsplash.com/@dustinlee), [KOBU Agency](https://unsplash.com/@kobuagency), [Aleksander Vlad](https://unsplash.com/@aleksow) et [Christian Wiediger](https://unsplash.com/@christianw).
