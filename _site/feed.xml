@@ -1,4 +1,111 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2020-04-13T17:10:56+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse - Mélanie B.</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Trouver de nouveaux sujets à découvrir</title><link href="http://localhost:4000/blog/2020/04/13/what-learn-as-front-dev.html" rel="alternate" type="text/html" title="Trouver de nouveaux sujets à découvrir" /><published>2020-04-13T00:00:00+02:00</published><updated>2020-04-13T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/04/13/what-learn-as-front-dev</id><content type="html" xml:base="http://localhost:4000/blog/2020/04/13/what-learn-as-front-dev.html">&lt;p&gt;&lt;em&gt;Dans cette article, je partage des liens que j’utilise pour savoir quelles connaissances creuser dans mon métier de développeur, notamment dans le domaine du front.&lt;/em&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2020-04-29T23:07:33+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse - Mélanie B.</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Comment utiliser l’API Google Sheet</title><link href="http://localhost:4000/blog/2020/04/29/use-google-sheet-as-api.html" rel="alternate" type="text/html" title="Comment utiliser l'API Google Sheet" /><published>2020-04-29T00:00:00+02:00</published><updated>2020-04-29T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/04/29/use-google-sheet-as-api</id><content type="html" xml:base="http://localhost:4000/blog/2020/04/29/use-google-sheet-as-api.html">&lt;p&gt;&lt;em&gt;Dans cette article, je décris une méthode simple pour récupérer les informations d’un Google Sheet via l’API de Google. Je considère ici que vous avez déjà un compte Google.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;créer-son-google-sheet&quot;&gt;Créer son Google Sheet&lt;/h2&gt;
+
+&lt;p&gt;La première étape est de créer un &lt;a href=&quot;https://docs.google.com/spreadsheets/&quot;&gt;Google Sheet&lt;/a&gt; avec les informations que vous souhaitez remonter. 
+Ces informations peuvent être sur des feuilles différentes, et il est possible d’utiliser la première ligne comme &lt;em&gt;header&lt;/em&gt;.
+Une fois le document créé, il faudra le partager pour le rendre &lt;strong&gt;Visible en Lecture&lt;/strong&gt; aux utilisateurs possédant le lien.&lt;/p&gt;
+
+&lt;h2 id=&quot;créer-une-clé-api&quot;&gt;Créer une clé API&lt;/h2&gt;
+
+&lt;p&gt;Pour pouvoir appeler l’API Google pour lire notre Google Sheet, il faut une clé API. Pour cela, il faut se rendre sur le &lt;a href=&quot;https://console.cloud.google.com&quot;&gt;Google Cloud Platform&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Sur Google Cloud Platform :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Créez un projet&lt;/li&gt;
+  &lt;li&gt;Dans les API proposées, cherchez et activez l’API &lt;em&gt;Google Sheets API&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Allez dans la partie Identifiants de votre projet&lt;/li&gt;
+  &lt;li&gt;Cliquez sur “Créer des identifiants” et choisissez “Clé API”&lt;/li&gt;
+  &lt;li&gt;Créez et récupérez votre clé API.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Je vous conseille de restreindre l’utilisation de cette clé API pour plus de sécurité.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;appeler-lapi&quot;&gt;Appeler l’API&lt;/h2&gt;
+
+&lt;p&gt;On a maintenant tout ce qu’il faut pour récupérer les informations de notre Google Sheet.&lt;/p&gt;
+
+&lt;p&gt;A l’heure où cette article est écrit, l’URL pour joindre l’API Google Sheets est constitué de cette manière :&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://sheets.googleapis.com/v4/spreadsheets/v4/spreadsheets/{ID_SPREADSHEET}/values/{NOM_DE_LA_FEUILLE}!{PLAGE_DE_DONNEES}?key={CLE_API}&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ID_SPREADSHEET&lt;/code&gt; : ID de votre Google Sheet, disponible dans l’URL du document (exemple d’url de document: https://docs.google.com/spreadsheets/d/&lt;em&gt;ID_SPREADSHEET&lt;/em&gt;/edit) ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NOM_DE_LA_FEUILLE&lt;/code&gt; : Précisez la feuille avec les informations que vous souhaitez récupérer ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;PLAGE_DE_DONNEES&lt;/code&gt; : Précisez la plage des données que vous souhaitez récupérer, comme par exemple &lt;em&gt;A1:F200&lt;/em&gt; ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CLE_API&lt;/code&gt; : Clé API créé et récupéré dans le point précédent.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Il suffit alors de faire un &lt;em&gt;GET&lt;/em&gt; sur cette url pour récupérer les informations de votre document.&lt;/p&gt;
+
+&lt;p&gt;Par exemple, un appel à &lt;code class=&quot;highlighter-rouge&quot;&gt;https://sheets.googleapis.com/v4/spreadsheets/v4/spreadsheets/XXX123/values/FeuilleExemple!A1:D30?key=YYY234&lt;/code&gt; répondra un JSON de ce format :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;range&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;FeuilleExemple!A1:D30&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;majorDimension&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ROWS&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;values&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Titre&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Message&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;URL&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Blog&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Mon blog&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://melaniemeb.github.io/blog/&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Le thé&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Il faut boire du thé&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://fr.wikipedia.org/wiki/Thé&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Avec, dans la partie &lt;code class=&quot;highlighter-rouge&quot;&gt;values&lt;/code&gt;, un &lt;em&gt;array&lt;/em&gt; pour chaque ligne.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Pour info, les quotas d’utilisation de l’API Google Sheets permettent jusqu’à 500 requêtes par 100 secondes par projets, et 100 requêtes par 100 secondes par utilisateur.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;transformer-la-réponse-en-js&quot;&gt;Transformer la réponse en JS&lt;/h2&gt;
+
+&lt;p&gt;Nous avons maintenant une API pour récupérer nos données déjà utilisables. Pour un confort d’utilisation, je vous propose de transformer la réponse pour récupérer des objets représentants chaque ligne.&lt;/p&gt;
+
+&lt;p&gt;Le code JS :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* Appel API fait précédemment et récupéré dans la variable response*/&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Récupérer les lignes du document&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;titles&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;shift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Sortir la première ligne qui représente nos titres&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Création d'un tableau qui contiendra nos données&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* 
+    Utilisation de Lodash pour simplifer, avec la méthode zipObject : https://lodash.com/docs/4.17.15#zipObject
+    Cette méthode permet de créer des objets avec comme clé les titres des colonnes
+  */&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;zipObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;titles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]));&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;permet d’avoir :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Titre:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'Blog'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Message:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'Mon&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;blog'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;URL:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'https://melaniemeb.github.io/blog/'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Titre:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'Le&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;thé'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Message:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'Il&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;faut&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;boire&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;du&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;thé'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;URL:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'https://fr.wikipedia.org/wiki/Thé'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;ressources&quot;&gt;Ressources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developers.google.com/sheets/api&quot;&gt;Documentation Google Sheet API&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="API" /><category term="Google Sheet" /><summary type="html">Dans cette article, je décris une méthode simple pour récupérer les informations d’un Google Sheet via l’API de Google. Je considère ici que vous avez déjà un compte Google.</summary></entry><entry><title type="html">Trouver de nouveaux sujets à découvrir</title><link href="http://localhost:4000/blog/2020/04/13/what-learn-as-front-dev.html" rel="alternate" type="text/html" title="Trouver de nouveaux sujets à découvrir" /><published>2020-04-13T00:00:00+02:00</published><updated>2020-04-13T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/04/13/what-learn-as-front-dev</id><content type="html" xml:base="http://localhost:4000/blog/2020/04/13/what-learn-as-front-dev.html">&lt;p&gt;&lt;em&gt;Dans cette article, je partage des liens que j’utilise pour savoir quelles connaissances creuser dans mon métier de développeur, notamment dans le domaine du front.&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;le-developer-roadmap&quot;&gt;Le &lt;em&gt;Developer RoadMap&lt;/em&gt;&lt;/h2&gt;
 
