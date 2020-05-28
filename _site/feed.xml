@@ -1,4 +1,179 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2020-04-29T23:07:33+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse - Mélanie B.</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Comment utiliser l’API Google Sheet</title><link href="http://localhost:4000/blog/2020/04/29/use-google-sheet-as-api.html" rel="alternate" type="text/html" title="Comment utiliser l'API Google Sheet" /><published>2020-04-29T00:00:00+02:00</published><updated>2020-04-29T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/04/29/use-google-sheet-as-api</id><content type="html" xml:base="http://localhost:4000/blog/2020/04/29/use-google-sheet-as-api.html">&lt;p&gt;&lt;em&gt;Dans cette article, je décris une méthode simple pour récupérer les informations d’un Google Sheet via l’API de Google. Je considère ici que vous avez déjà un compte Google.&lt;/em&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2020-05-28T10:48:57+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse - Mélanie B.</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Créer une API en Node.js avec Hapi et la déployer sur Heroku</title><link href="http://localhost:4000/blog/2020/05/27/first-node-api-with-hapi.html" rel="alternate" type="text/html" title="Créer une API en Node.js avec Hapi et la déployer sur Heroku" /><published>2020-05-27T00:00:00+02:00</published><updated>2020-05-27T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/05/27/first-node-api-with-hapi</id><content type="html" xml:base="http://localhost:4000/blog/2020/05/27/first-node-api-with-hapi.html">&lt;p&gt;&lt;em&gt;Dans ce tutoriel, nous construisons une API simple en Node.js avec le framework Hapi, nous la testons avec Ngrok et nous la mettons en ligne avec Heroku.
+&lt;a href=&quot;https://github.com/MelanieMEB/api-googlesheet-slack/tree/simple-api&quot;&gt;Le code source du tutoriel&lt;/a&gt; est disponible sur github.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;prérequis&quot;&gt;Prérequis&lt;/h2&gt;
+
+&lt;p&gt;Ce tutoriel suppose que vous avez déjà &lt;a href=&quot;https://www.npmjs.com/get-npm&quot;&gt;NPM&lt;/a&gt;, &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;Node&lt;/a&gt;, et &lt;a href=&quot;https://git-scm.com/&quot;&gt;Git&lt;/a&gt;. 
+Lors de l’écriture de ce tutoriel, Hapi est en version 19.1.1.&lt;/p&gt;
+
+&lt;h2 id=&quot;création-dun-serveur-api-avec-hapi&quot;&gt;Création d’un serveur Api avec Hapi&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://hapi.dev/&quot;&gt;Hapi&lt;/a&gt; est un framework Node permettant de développer une API.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Un autre framework Node très utilisé pour les API est &lt;a href=&quot;https://expressjs.com/fr/&quot;&gt;Express&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;préparer-le-projet-&quot;&gt;Préparer le projet :&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Créer un dossier dans lequel nous allons construire l’API ;&lt;/li&gt;
+  &lt;li&gt;Initialiser un nouveau projet : &lt;code class=&quot;highlighter-rouge&quot;&gt;npm init&lt;/code&gt; ;&lt;/li&gt;
+  &lt;li&gt;Installer Hapi : &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --save @hapi/hapi&lt;/code&gt; ;&lt;/li&gt;
+  &lt;li&gt;Créer un fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt; : dans le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; créé lors de l’initialisation, le fichier &lt;em&gt;main&lt;/em&gt; est habituellement le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;créer-lapi&quot;&gt;Créer l’API&lt;/h3&gt;
+
+&lt;p&gt;Une fois la préparation du projet effectué, nous allons pouvoir écrire dans le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt; pour créer notre API.&lt;/p&gt;
+
+&lt;p&gt;Le code minimum pour créer le serveur de notre API est :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Hapi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;@hapi/hapi&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// Import de Hapi&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;init&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Initialisation d'un nouveau serveur Hapi avec sa configuration&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Hapi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;localhost&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;// Démarrage du serveur&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Le serveur est lancé sur %s&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Gestion en cas d'erreur de l'Api&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;unhandledRejection&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Lancement de l'initialisation&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Une fois le fichier complété, vous pouvez lancer &lt;code class=&quot;highlighter-rouge&quot;&gt;node index.js&lt;/code&gt;. Dans la console, vous devriez voir le message &lt;code class=&quot;highlighter-rouge&quot;&gt;Le serveur est lancé sur http://localhost:3000&lt;/code&gt; : votre serveur API est bien lancé en local !&lt;/p&gt;
+
+&lt;h3 id=&quot;ajout-dune-route&quot;&gt;Ajout d’une route&lt;/h3&gt;
+
+&lt;p&gt;Votre API est créé, le serveur se lance, mais ne permet pas de faire grand chose. Pour cela, nous avons besoin d’ajouter une route.
+Pour configurer notre route, nous avons besoin de préciser la méthode HTTP utilisé (&lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt;, …), le chemin (&lt;code class=&quot;highlighter-rouge&quot;&gt;path&lt;/code&gt;) et ce que va faire la route (dans le &lt;code class=&quot;highlighter-rouge&quot;&gt;handler&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Notre route renverra le message “Il est 20h : c’est l’heure du thé !” quand nous l’appelerons via &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000/tea-time&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Création d'une route GET, que l'on pourra appelé via http://localhost:300/tea-time&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/tea-time&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`Il est &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getHours&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;h : c'est l'heure du thé !`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Une fois la route créé, vous pouvez de nouveau lancer le serveur, et lancer votre navigateur avec comme url  &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000/tea-time&lt;/code&gt;. Le message apparait !&lt;/p&gt;
+
+&lt;h3 id=&quot;encore-quelques-modifications-pour-finir&quot;&gt;Encore quelques modifications pour finir&lt;/h3&gt;
+
+&lt;p&gt;Pour finaliser votre API avant de la mettre en ligne, je vous propose quelques modifications :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Changer la façon dont vous lancez l’api : dans le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;, ajouter la commande &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;start&quot;: &quot;node index.js&quot;&lt;/code&gt; dans la partie &lt;code class=&quot;highlighter-rouge&quot;&gt;script&lt;/code&gt; pour permettre de lancer votre API via &lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt; directement.&lt;/li&gt;
+  &lt;li&gt;Pouvoir préciser le host et le port plus facilement : en début de fichier, ajouter les deux variables &lt;code class=&quot;highlighter-rouge&quot;&gt;const host = process.env.HOST || '127.0.0.1';&lt;/code&gt; et &lt;code class=&quot;highlighter-rouge&quot;&gt;const port = process.env.PORT || 3000;&lt;/code&gt;, et initialiser votre serveur avec &lt;code class=&quot;highlighter-rouge&quot;&gt;const server = Hapi.server({ port, host });&lt;/code&gt;. En plus de simplifier la lecture, cela permettra à l’hébergeur de votre serveur API de changer le host et le port au besoin.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;tester-son-serveur-api-local-comme-sil-était-en-ligne&quot;&gt;Tester son serveur Api local comme s’il était en ligne&lt;/h2&gt;
+
+&lt;p&gt;Vous êtes fière de votre mini-api mais vos amis ne peuvent pas aller sur localhost ? Que cela ne tienne, vous pouvez avoir une URL disponible pour votre API en local.
+Pour cela, nous allons utiliser le service &lt;a href=&quot;https://ngrok.com/&quot;&gt;Ngrok&lt;/a&gt;. Ce service permet d’avoir rapidement une URL qui pointe vers votre localhost. Cela permet de tester simplement en ligne son API hébergé en local, sans avoir à la déployer.&lt;/p&gt;
+
+&lt;p&gt;Pour pouvoir utiliser ce service, il faut :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Se créer un compte sur &lt;a href=&quot;https://ngrok.com/&quot;&gt;Ngrok&lt;/a&gt; ;&lt;/li&gt;
+  &lt;li&gt;Une fois connectée, suivre les indications sur la page d’accueil : installer ngrok et se connecter à votre compte via &lt;code class=&quot;highlighter-rouge&quot;&gt;./ngrok authtoken VOTRE_TOKEN&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Vous pouvez alors demander à Ngrok une URL pour votre API :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Lancer votre API : &lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt; ;&lt;/li&gt;
+  &lt;li&gt;Lancer Ngrok : &lt;code class=&quot;highlighter-rouge&quot;&gt;./ngrok http 3000&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ngrok crée alors un tunnel vers votre localhost. Il vous suffit ensuite d’utiliser l’URL indiqué dans la partie &lt;em&gt;Forwarding&lt;/em&gt; de la sortie de Ngrok.&lt;/p&gt;
+
+&lt;p&gt;Ainsi, votre serveur API hébergé en local est disponible dans le monde entier. Très pratique pour tester !&lt;/p&gt;
+
+&lt;h2 id=&quot;déployer-sur-heroku&quot;&gt;Déployer sur Heroku&lt;/h2&gt;
+
+&lt;p&gt;Votre PC ne peut pas être toujours allumé, et pour cela il va falloir l’héberger ailleur. 
+Je vous propose ici de déployer votre application sur &lt;a href=&quot;https://www.heroku.com/&quot;&gt;Heroku&lt;/a&gt;.
+Heroku est une Plateforme en tant que Service (PaaS) qui vous permet de déployer des applications sur le Cloud très facilement. Il est possible de créer gratuitement un compte et d’héberger plusieurs applications gratuitement (mais avec des limitations : voir &lt;a href=&quot;https://www.heroku.com/free&quot;&gt;le plan gratuit heroku&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;A noter dans les limitations : l’application se met en veille automatiquement après 30 minutes d’inactivité. Le prochain appel sera plus long que d’habitude, voir terminera en _timeout&lt;/em&gt;. Le plan gratuit de Heroku convient pour une utilisation personnelle ou de test._&lt;/p&gt;
+
+&lt;p&gt;Pour déployer notre mini-api, il faut :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Se créer un compte sur &lt;a href=&quot;https://www.heroku.com/&quot;&gt;Heroku&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Une fois connecté, cliquer sur &lt;em&gt;New&lt;/em&gt; &amp;gt; &lt;em&gt;Create new app&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Choisir un nom d’application et votre région, puis cliquer sur &lt;em&gt;Create app&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Une fois sur l’interface, vous pouvez configurer votre application. 
+Pour la déployer, vous pouvez utiliser le Heroku CLI ou Github, nous allons utiliser le &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;Heroku CLI&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Pour déployer :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Suiver les instructions du Heroku CLI pour l’installer ;&lt;/li&gt;
+  &lt;li&gt;Suiver ensuite les instructions que vous avez sur la page principale de votre application.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ces instructions sont :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Se connecter à heroku via le CLI : &lt;code class=&quot;highlighter-rouge&quot;&gt;heroku login&lt;/code&gt; ;&lt;/li&gt;
+  &lt;li&gt;Initialiser git dans votre projet (dans le dossier de votre api) : &lt;code class=&quot;highlighter-rouge&quot;&gt;git init&lt;/code&gt; ;&lt;/li&gt;
+  &lt;li&gt;Puis lier à heroku via &lt;code class=&quot;highlighter-rouge&quot;&gt;heroku git:remote -a NOM_DE_VOTRE_APP&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Avant de déployer notre application, nous allons voir dans la documentation de Heroku la configuration minimale pour que notre API fonctionne.
+La &lt;a href=&quot;https://devcenter.heroku.com/articles/getting-started-with-nodejs#prepare-the-app&quot;&gt;documentation de Heroku pour Node.js&lt;/a&gt; nous propose de cloner le &lt;a href=&quot;https://github.com/heroku/node-js-getting-started&quot;&gt;projet Github node-js-getting-started&lt;/a&gt;. Ce projet est une API en Node avec Express.
+Même si ce n’est pas le même framework, ce n’est pas grave. Nous pouvons quand même analyser comment le serveur est créé.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Si nous regardons le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;, nous voyons que &lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt; lance le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt; (comme nous, c’est pratique !)&lt;/li&gt;
+  &lt;li&gt;Dans le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;index.js&lt;/code&gt;, nous voyons que la seule variable de configuration du fichier est &lt;code class=&quot;highlighter-rouge&quot;&gt;const PORT = process.env.PORT || 5000&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Dans notre cas, nous avons le port et le host. Nous allons modifier notre fichier pour ne préciser que le port lors de la création de notre API. 
+Lors de l’initialisation de notre serveur, nous aurons alors &lt;code class=&quot;highlighter-rouge&quot;&gt;const server = Hapi.server({ port });&lt;/code&gt;, et la variable &lt;code class=&quot;highlighter-rouge&quot;&gt;HOST&lt;/code&gt; peut être supprimée.&lt;/p&gt;
+
+&lt;p&gt;Notre application est maintenant prête pour Heroku !&lt;/p&gt;
+
+&lt;p&gt;Pour déployer enfin votre application, il faut faire un commit git et &lt;em&gt;push&lt;/em&gt; sur heroku :&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git add .
+git commit -m &quot;Premier commit et je deploie&quot;
+git push heroku master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Lorsque vous lancez &lt;code class=&quot;highlighter-rouge&quot;&gt;git push heroku master&lt;/code&gt;, votre code est envoyé à Heroku et votre application va être déployé.
+Heroku va automatiquement voir que votre projet est un projet Node.js, il va pouvoir lancer &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt; pour installer les dépendances, et lancer ensuite &lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt; (défini précédemment dans notre &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;), qui est la commande de base pour les applications Node.js.&lt;/p&gt;
+
+&lt;p&gt;Maintenant, retournons sur le site de Heroku, dans la partie &lt;em&gt;Activity&lt;/em&gt; de notre application. Si tout va bien, la dernière activité indique &lt;em&gt;Deployed&lt;/em&gt;.
+Vous pouvez cliquer sur le bouton &lt;em&gt;Open app&lt;/em&gt; présent en haut à droite sur Heroku, et ajouter à l’URL le &lt;em&gt;path&lt;/em&gt; de votre route (https://VOTRE_APP_HEROKU.herokuapp.com/tea-time) pour retrouver l’heure du thé ;)&lt;/p&gt;
+
+&lt;h3 id=&quot;mais-ce-nest-pas-la-bonne-heure-pour-le-thé-&quot;&gt;Mais ce n’est pas la bonne heure pour le thé !&lt;/h3&gt;
+
+&lt;p&gt;Si vous testez l’application présentée ici, vous pouvez avoir un décalage horaire. En effet, le &lt;code class=&quot;highlighter-rouge&quot;&gt;new Date()&lt;/code&gt; dans notre API dépend de l’heure du serveur. En local, l’heure est celle de votre ordinateur. Sur Heroku, ce sera l’heure du serveur de Heroku. Pour cela, il faut changer la Timezone de Heroku.
+Vous pouvez la modifier en utilisant le CLI Heroku, avec &lt;code class=&quot;highlighter-rouge&quot;&gt;heroku config:add TZ=&quot;Europe/Paris&quot;&lt;/code&gt; : cette commande va ajouter une variable d’environnement pour Heroku, qui s’alignera alors sur l’heure française. Cette commande va aussi redémarrer l’application pour que toutes les modifications de variables d’environnement soit pris en compte. 
+Tout est redevenu normal !&lt;/p&gt;
+
+&lt;h2 id=&quot;amusez-vous-&quot;&gt;Amusez-vous !&lt;/h2&gt;
+
+&lt;p&gt;Dans ce tutoriel, nous avons pu voir comment créer une API en 5 minutes, mais aussi comment la tester et comment la déployer. Une API peut être longue à développer, car elle contient le plus souvent la logique des applications. 
+Mais avec ces briques de bases, vous avez ce qu’il faut pour créer des API. Amusez-vous avez ces outils et n’hésitez pas à lire la documentation quand vous utilisez de nouveaux framework, outils, services.&lt;/p&gt;
+
+&lt;h2 id=&quot;ressources&quot;&gt;Ressources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hapi.dev/&quot;&gt;Documentation Hapi&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ngrok.com/&quot;&gt;Ngrok&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.heroku.com/&quot;&gt;Heroku&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/MelanieMEB/api-googlesheet-slack/tree/simple-api&quot;&gt;Le code source du tutoriel&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="API" /><category term="Node" /><category term="HAPI" /><summary type="html">Dans ce tutoriel, nous construisons une API simple en Node.js avec le framework Hapi, nous la testons avec Ngrok et nous la mettons en ligne avec Heroku. Le code source du tutoriel est disponible sur github.</summary></entry><entry><title type="html">Comment utiliser l’API Google Sheet</title><link href="http://localhost:4000/blog/2020/04/29/use-google-sheet-as-api.html" rel="alternate" type="text/html" title="Comment utiliser l'API Google Sheet" /><published>2020-04-29T00:00:00+02:00</published><updated>2020-04-29T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/04/29/use-google-sheet-as-api</id><content type="html" xml:base="http://localhost:4000/blog/2020/04/29/use-google-sheet-as-api.html">&lt;p&gt;&lt;em&gt;Dans cette article, je décris une méthode simple pour récupérer les informations d’un Google Sheet via l’API de Google. Je considère ici que vous avez déjà un compte Google.&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;créer-son-google-sheet&quot;&gt;Créer son Google Sheet&lt;/h2&gt;
 
