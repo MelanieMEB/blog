@@ -1,4 +1,158 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2020-05-28T10:48:57+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse - Mélanie B.</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Créer une API en Node.js avec Hapi et la déployer sur Heroku</title><link href="http://localhost:4000/blog/2020/05/27/first-node-api-with-hapi.html" rel="alternate" type="text/html" title="Créer une API en Node.js avec Hapi et la déployer sur Heroku" /><published>2020-05-27T00:00:00+02:00</published><updated>2020-05-27T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/05/27/first-node-api-with-hapi</id><content type="html" xml:base="http://localhost:4000/blog/2020/05/27/first-node-api-with-hapi.html">&lt;p&gt;&lt;em&gt;Dans ce tutoriel, nous construisons une API simple en Node.js avec le framework Hapi, nous la testons avec Ngrok et nous la mettons en ligne avec Heroku.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2020-06-04T21:08:39+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse - Mélanie B.</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Créer une commande Slack pour afficher la réponse d’une API</title><link href="http://localhost:4000/blog/2020/06/04/command-slack.html" rel="alternate" type="text/html" title="Créer une commande Slack pour afficher la réponse d'une API" /><published>2020-06-04T00:00:00+02:00</published><updated>2020-06-04T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/06/04/command-slack</id><content type="html" xml:base="http://localhost:4000/blog/2020/06/04/command-slack.html">&lt;p&gt;&lt;em&gt;Dans ce tutoriel, nous allons voir comment créer une commande Slack pour appeler une API. Notre API sera en NodeJS, et a été commencé dans l’article sur la &lt;a href=&quot;https://melaniemeb.github.io/blog/2020/05/27/first-node-api-with-hapi.html&quot;&gt;création d’une API&lt;/a&gt;. Le code pour ce tutorial est disponible sur &lt;a href=&quot;https://github.com/MelanieMEB/api-googlesheet-slack/tree/slash-command-slack&quot;&gt;le github d’exemple&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;créer-une-application-slack&quot;&gt;Créer une application slack&lt;/h2&gt;
+
+&lt;p&gt;Slack vous permet d’installer des applications pour améliorer l’expérience de votre espace de travail. Vous avez aussi la possibilité de créer votre propre application.&lt;/p&gt;
+
+&lt;p&gt;Dans le menu de votre espace de travail Slack, allez dans &lt;em&gt;Paramètres et administration&lt;/em&gt; puis choississez &lt;em&gt;Gérer les applications&lt;/em&gt;.
+Sur cette page, vous retrouverez la liste des applications installées dans votre espace Slack. Il va falloir y ajouter une nouvelle application.
+Pour cela, cliquez sur &lt;em&gt;Créer&lt;/em&gt; en haut, ou allez sur la page &lt;a href=&quot;https://api.slack.com&quot;&gt;api.slack.com&lt;/a&gt;, puis cliquez sur &lt;em&gt;Your Apps&lt;/em&gt;.
+Sur cette page, vous retrouvez les applications Slack que vous avez créées ou qui sont partagées avec vous. 
+Le bouton &lt;em&gt;Create New App&lt;/em&gt; vous permet de commencer la création de votre application.
+Vous devez alors préciser le nom de votre application et l’espace de travail dans lequel vous allez travailler.&lt;/p&gt;
+
+&lt;p&gt;Vous arrivez alors sur l’interface de développement de votre application. Vous pouvez y ajouter plusieurs briques comme les &lt;em&gt;webhooks&lt;/em&gt;, les &lt;em&gt;bots&lt;/em&gt;, et aussi les &lt;em&gt;slash commands&lt;/em&gt;, ce que nous voulons mettre en place aujourd’hui.&lt;/p&gt;
+
+&lt;h2 id=&quot;ajouter-une-commande-slash-ma-commande&quot;&gt;Ajouter une commande slash (/ma-commande)&lt;/h2&gt;
+
+&lt;p&gt;Pour ajouter une commande slash, il faut choisir d’ajouter une brique &lt;em&gt;Command Slash&lt;/em&gt; via l’interface de votre nouvelle application.&lt;/p&gt;
+
+&lt;p&gt;Cliquez sur &lt;em&gt;Slash Commands&lt;/em&gt; puis &lt;em&gt;Create New Command&lt;/em&gt;.
+Vous devez ensuite préciser :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;Command&lt;/em&gt; : comment votre commande slack sera appelée (ex : /temps-infusion) ;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Request URL&lt;/em&gt; : l’URL qui recevera la demande slack et qui renverra le message (dans un premier temps, mettre une fausse URL, elle sera modifiée plus tard) ;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Short description&lt;/em&gt; : une courte description pour aider les utilisateurs à savoir ce que fait votre commande (ex : Connaitre le temps d’infusion de mon thé) ;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Usage hint&lt;/em&gt; : vous pouvez ajouter des paramètres (ex : couleur , et la commande &lt;em&gt;/temps-infusion&lt;/em&gt; couleur pourra être appelé en envoyant &lt;code class=&quot;highlighter-rouge&quot;&gt;/temps-infusion vert&lt;/code&gt; dans Slack).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Votre commande est créé, mais l’URL proposée ne fonctionne pas, nous la modifirons plus tard.&lt;/p&gt;
+
+&lt;p&gt;Pour que votre commande soit activée dans votre espace Slack, il va falloir l’installer :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Dans le menu de votre application, allez dans &lt;em&gt;Install App&lt;/em&gt; ;&lt;/li&gt;
+  &lt;li&gt;Cliquez sur &lt;em&gt;Install App to Workspace&lt;/em&gt; ;&lt;/li&gt;
+  &lt;li&gt;Vérifiez les autorisations et validez.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Votre commande slash est prête à être appelé sur Slack, en utilisant &lt;code class=&quot;highlighter-rouge&quot;&gt;/temps-infusion&lt;/code&gt;, mais vous aurez l’erreur &lt;code class=&quot;highlighter-rouge&quot;&gt;Échec de la commande /temps-infusion avec l’erreur « http_client_error »&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;lappel-de-slack-et-la-réponse&quot;&gt;L’appel de Slack et la réponse&lt;/h2&gt;
+
+&lt;p&gt;Slack utilise la méthode POST pour appeler l’URL précisée lors de la création de la commande. Par exemple, si l’URL renseignée est &lt;code class=&quot;highlighter-rouge&quot;&gt;http://test/temps-infusion&lt;/code&gt; et la commande slash &lt;code class=&quot;highlighter-rouge&quot;&gt;/temps-infusion vert&lt;/code&gt;, alors l’appel sera :
+&lt;code class=&quot;highlighter-rouge&quot;&gt;POST http://test/temps-infusion&lt;/code&gt; et le payload contiendra :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;  &lt;span class=&quot;nx&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;AAXX123&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Verification Token de l'application slack &lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;team_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;TEST123&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Identifiant de l'espace de travail&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;team_domain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Nom de de l'espace de travail&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;channel_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;DDDDAAAAA1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Identifiant de la chaine où la commande a été tapée&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;channel_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;directmessage&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Nom de la chaine &lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;user_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;UUUAAA111&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Identifiant de l'utilisateur qui a envoyé la commande&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;user_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;melanie&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Nom de l'utilisateur qui a envoyé la commande&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/temps-infusion&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Commande qui a été appelé&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;vert&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Paramètres envoyés après le nom de la commande&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;response_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://hooks.slack.com/commands/aaze2323&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// URL pour pouvoir continuer à envoyer des messages vers Slack&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;trigger_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;aa.bb.cc&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// ID du trigger de l'évènement &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Avec ces informations, nous allons pouvoir créer notre route API.&lt;/p&gt;
+
+&lt;h2 id=&quot;créer-notre-route-api-pour-slack&quot;&gt;Créer notre route API pour Slack&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;L’article précédent, la &lt;a href=&quot;https://melaniemeb.github.io/blog/2020/05/27/first-node-api-with-hapi.html&quot;&gt;création d’une API&lt;/a&gt; est notre point de départ pour notre route API.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Dans notre API, nous avons besoin d’une nouvelle route qui sera appelée via la méthode &lt;em&gt;POST&lt;/em&gt; :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Création d'une route POST pour renvoyer un message à afficher sur Slack, que l'on pourra appelé via http://localhost:300/temps-infusion&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;POST&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/temps-infusion&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// Retourner notre message pour Slack&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Dans cette route, nous devons :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Récupérer le paramètre envoyé en payload&lt;/li&gt;
+  &lt;li&gt;Choisir le message à renvoyer&lt;/li&gt;
+  &lt;li&gt;Serialiser la réponse pour la mettre au format attendu par Slack.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Pour récuperer le paramètre envoyé en &lt;em&gt;payload&lt;/em&gt;, il suffit de récupérer l’information via &lt;code class=&quot;highlighter-rouge&quot;&gt;request.payload&lt;/code&gt; dans notre application. 
+Dans notre cas, seul le &lt;code class=&quot;highlighter-rouge&quot;&gt;text&lt;/code&gt; nous intéresse. Nous pouvons donc récupérer la couleur de thé demandée via &lt;code class=&quot;highlighter-rouge&quot;&gt;request.payload.text&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Ensuite, la logique de notre route sera simple : d’après la couleur de thé envoyé en paramètre, nous renverrons un message indiquant un temps d’infusion.&lt;/p&gt;
+
+&lt;p&gt;Une fois que le message est prêt, nous pouvons l’envoyer sur Slack en retournant :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Mon message&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Dans l’attribut &lt;code class=&quot;highlighter-rouge&quot;&gt;text&lt;/code&gt; de ma réponse, je vais pouvoir préciser le message que je souhaite renvoyer.
+Nous renvoyons ici qu’un simple message, mais il est possible de renvoyer des messages plus complexes (nous reviendrons sur ce point).&lt;/p&gt;
+
+&lt;h2 id=&quot;sécurisation-de-lappel-entre-slack-et-notre-api&quot;&gt;Sécurisation de l’appel entre Slack et notre API&lt;/h2&gt;
+
+&lt;p&gt;Pour finaliser notre API, nous allons ajouter une simple sécurisation en utilisant le &lt;em&gt;token&lt;/em&gt; envoyé par l’application Slack. Chaque application a son propre &lt;em&gt;token&lt;/em&gt;.
+Il est important de faire attention à la sécurité de votre API, et c’est possible ici en vérifiant que le &lt;em&gt;token&lt;/em&gt; envoyé par l’application est bien celui attendu. Cela évitera que d’autres personnes utilisent aussi votre API.&lt;/p&gt;
+
+&lt;p&gt;Dans l’exemple disponible sur Github, nous utilisons &lt;code class=&quot;highlighter-rouge&quot;&gt;dotenv&lt;/code&gt; pour pouvoir ajouter une variable d’environnement &lt;code class=&quot;highlighter-rouge&quot;&gt;VERIFICATION_TOKEN_SLACK&lt;/code&gt; qui sera comparée avec celle reçue qui est disponible dans le &lt;code class=&quot;highlighter-rouge&quot;&gt;request.payload&lt;/code&gt;. Cette modification a été fait dans &lt;a href=&quot;https://github.com/MelanieMEB/api-googlesheet-slack/commit/6ff264e927db52d285c39cfbf1ddc8626494a1bf&quot;&gt;le commit qui ajoute la vérification du token&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;dernier-réglage-et-ça-marche-&quot;&gt;Dernier réglage et ça marche !&lt;/h2&gt;
+
+&lt;p&gt;Votre API est prête ! Pour vérifier que tout fonctionne, je vous conseille de faire comme dans l’article &lt;a href=&quot;https://melaniemeb.github.io/blog/2020/05/27/first-node-api-with-hapi.html&quot;&gt;création d’une API&lt;/a&gt; : lancer votre API en local et utiliser &lt;em&gt;ngrok&lt;/em&gt; pour pouvoir avoir une URL accessible. 
+Une fois cette URL obtenue (par ngrok ou en déployant), nous pouvons modifier notre application Slack pour mettre la bonne URL.
+Comme précédemment, il faut retourner dans la configuration de votre application pour changer l’URL, en n’oubliant pas de bien préciser la route (ici &lt;code class=&quot;highlighter-rouge&quot;&gt;/temps-infusion&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Maintenant, si vous envoyer la commande &lt;code class=&quot;highlighter-rouge&quot;&gt;/temps-infusion vert&lt;/code&gt; sur votre Slack, vous aurez comme réponse : &lt;code class=&quot;highlighter-rouge&quot;&gt;Le temps d'infusion pour un thé vert est de 2 à 3 minutes.&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Cette exemple est simple, mais maintenant que vous avez pu connecter votre commande slack à votre API, vous pouvez faire ce que vous voulez !&lt;/p&gt;
+
+&lt;h2 id=&quot;envoyer-des-messages-plus-complexes&quot;&gt;Envoyer des messages plus complexes&lt;/h2&gt;
+
+&lt;p&gt;Slack vous permet d’envoyer des messages plus complexes, avec du style, des images, des boutons, etc. Ces différents éléments sont représentés via des blocks différents qui seront décrits dans notre réponse.&lt;/p&gt;
+
+&lt;p&gt;Par exemple, ce format de réponse :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;blocks&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;section&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;mrkdwn&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;:tea: Votre infusion :tea:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;divider&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;section&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;mrkdwn&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`Votre temps d'infusion est *de 2 à 3 minutes.*`&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;renverra :&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/img-articles/slash-command.png&quot; alt=&quot;Reponse Slack avec emoji, barre de division et message&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Slack vous propose un &lt;a href=&quot;https://app.slack.com/block-kit-builder/&quot;&gt;Block Kit Builder&lt;/a&gt; pour tester, visualiser et construire votre réponse Slack.&lt;/p&gt;
+
+&lt;h2 id=&quot;ressources&quot;&gt;Ressources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/MelanieMEB/api-googlesheet-slack/tree/slash-command-slack&quot;&gt;Github avec notre exemple&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://api.slack.com/interactivity/slash-commands/&quot;&gt;(EN) Slash Command Slack&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://api.slack.com/tutorials/slash-block-kit/&quot;&gt;(EN) Slack block message&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/slackapi/node-slack-sdk/&quot;&gt;(EN) Node Slack SDK&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://api.slack.com/messaging/composing/layouts/&quot;&gt;(EN) Create Rich Message Layouts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://app.slack.com/block-kit-builder/&quot;&gt;(EN)Block Kit Builder&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="API" /><category term="Slack" /><summary type="html">Dans ce tutoriel, nous allons voir comment créer une commande Slack pour appeler une API. Notre API sera en NodeJS, et a été commencé dans l’article sur la création d’une API. Le code pour ce tutorial est disponible sur le github d’exemple.</summary></entry><entry><title type="html">Créer une API en Node.js avec Hapi et la déployer sur Heroku</title><link href="http://localhost:4000/blog/2020/05/27/first-node-api-with-hapi.html" rel="alternate" type="text/html" title="Créer une API en Node.js avec Hapi et la déployer sur Heroku" /><published>2020-05-27T00:00:00+02:00</published><updated>2020-05-27T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/05/27/first-node-api-with-hapi</id><content type="html" xml:base="http://localhost:4000/blog/2020/05/27/first-node-api-with-hapi.html">&lt;p&gt;&lt;em&gt;Dans ce tutoriel, nous construisons une API simple en Node.js avec le framework Hapi, nous la testons avec Ngrok et nous la mettons en ligne avec Heroku.
 &lt;a href=&quot;https://github.com/MelanieMEB/api-googlesheet-slack/tree/simple-api&quot;&gt;Le code source du tutoriel&lt;/a&gt; est disponible sur github.&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;prérequis&quot;&gt;Prérequis&lt;/h2&gt;
@@ -554,16 +708,7 @@ Pour lancer l’enregistrement, il faut appeler &lt;code class=&quot;highlighter
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;console.dir&lt;/code&gt; devrait être plus souvent utilisé sur les Array ou Object ;&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;console.time&lt;/code&gt; permet d’éviter de faire des &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log&lt;/code&gt; avec des dates pour mesurer le temps ;&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;console.assert&lt;/code&gt; permet d’éviter d’afficher des informations seulement pour vérifier ce qui est attendu.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="JS" /><category term="debug" /><summary type="html">L’utilisation des console.log est l’une des approches pour débugger les plus utilisées par les développeurs. La majorité du temps, seule la méthode console.log est utilisée, alors qu’une palette d’autres possibilités est offertes au développeurs.</summary></entry><entry><title type="html">Retrouver sa clé d’activation Windows sous Linux</title><link href="http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux.html" rel="alternate" type="text/html" title="Retrouver sa clé d'activation Windows sous Linux" /><published>2019-12-29T00:00:00+01:00</published><updated>2019-12-29T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux.html">&lt;p&gt;Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.&lt;/p&gt;
-
-&lt;p&gt;Mais souvent aussi, on préfère passer sous une distribution Linux, et on écrase totalement le Windows installé.
-Et si nous souhaitons ensuite réinstaller notre Windows, nous n’avons pas la clé d’activation.&lt;/p&gt;
-
-&lt;p&gt;Pour récupérer la clé d’activation sous Linux, c’est possible avec cette commande :&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo tail -c +56 /sys/firmware/acpi/tables/MSDM&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Plutôt pratique :)&lt;/p&gt;</content><author><name></name></author><category term="Windows" /><category term="Linux" /><summary type="html">Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.</summary></entry><entry><title type="html">Tips CSS: les descendants selectors</title><link href="http://localhost:4000/blog/2019/12/29/css-descendants-selectors.html" rel="alternate" type="text/html" title="Tips CSS: les descendants selectors" /><published>2019-12-29T00:00:00+01:00</published><updated>2019-12-29T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/29/css-descendants-selectors</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/29/css-descendants-selectors.html">&lt;p&gt;&lt;em&gt;Cet article fait suite à l’article &lt;a href=&quot;https://medium.com/@devdevcharlie/things-nobody-ever-taught-me-about-css-5d16be8d5d0e&quot;&gt;source&lt;/a&gt;, 
+&lt;/ul&gt;</content><author><name></name></author><category term="JS" /><category term="debug" /><summary type="html">L’utilisation des console.log est l’une des approches pour débugger les plus utilisées par les développeurs. La majorité du temps, seule la méthode console.log est utilisée, alors qu’une palette d’autres possibilités est offertes au développeurs.</summary></entry><entry><title type="html">Tips CSS: les descendants selectors</title><link href="http://localhost:4000/blog/2019/12/29/css-descendants-selectors.html" rel="alternate" type="text/html" title="Tips CSS: les descendants selectors" /><published>2019-12-29T00:00:00+01:00</published><updated>2019-12-29T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/29/css-descendants-selectors</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/29/css-descendants-selectors.html">&lt;p&gt;&lt;em&gt;Cet article fait suite à l’article &lt;a href=&quot;https://medium.com/@devdevcharlie/things-nobody-ever-taught-me-about-css-5d16be8d5d0e&quot;&gt;source&lt;/a&gt;, 
 et j’ai souhaité noter certaines informations que j’ai trouvé utiles.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Les &lt;em&gt;descendant selectors&lt;/em&gt; permettent de préciser que le sélecteur souhaité doit être pris en compte s’il est sous un autre sélecteur précis.
@@ -582,7 +727,16 @@ On les écrit en les pensant de gauche à droite, mais ils sont lus de droite à
 &lt;/ul&gt;
 
 &lt;p&gt;Cet ordre contre-intuitif peut expliquer des lenteurs sur le site.
-De plus, c’est une autre raison pour créer des classes spécifiques plutôt que d’enchaîner des sélecteurs.&lt;/p&gt;</content><author><name></name></author><category term="CSS" /><summary type="html">Cet article fait suite à l’article source, et j’ai souhaité noter certaines informations que j’ai trouvé utiles.</summary></entry><entry><title type="html">Ouverture du blog</title><link href="http://localhost:4000/blog/2019/12/28/presentation.html" rel="alternate" type="text/html" title="Ouverture du blog" /><published>2019-12-28T00:00:00+01:00</published><updated>2019-12-28T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/28/presentation</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/28/presentation.html">&lt;p&gt;Ca y est, le blog est lancé ! 
+De plus, c’est une autre raison pour créer des classes spécifiques plutôt que d’enchaîner des sélecteurs.&lt;/p&gt;</content><author><name></name></author><category term="CSS" /><summary type="html">Cet article fait suite à l’article source, et j’ai souhaité noter certaines informations que j’ai trouvé utiles.</summary></entry><entry><title type="html">Retrouver sa clé d’activation Windows sous Linux</title><link href="http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux.html" rel="alternate" type="text/html" title="Retrouver sa clé d'activation Windows sous Linux" /><published>2019-12-29T00:00:00+01:00</published><updated>2019-12-29T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux.html">&lt;p&gt;Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.&lt;/p&gt;
+
+&lt;p&gt;Mais souvent aussi, on préfère passer sous une distribution Linux, et on écrase totalement le Windows installé.
+Et si nous souhaitons ensuite réinstaller notre Windows, nous n’avons pas la clé d’activation.&lt;/p&gt;
+
+&lt;p&gt;Pour récupérer la clé d’activation sous Linux, c’est possible avec cette commande :&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo tail -c +56 /sys/firmware/acpi/tables/MSDM&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Plutôt pratique :)&lt;/p&gt;</content><author><name></name></author><category term="Windows" /><category term="Linux" /><summary type="html">Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.</summary></entry><entry><title type="html">Ouverture du blog</title><link href="http://localhost:4000/blog/2019/12/28/presentation.html" rel="alternate" type="text/html" title="Ouverture du blog" /><published>2019-12-28T00:00:00+01:00</published><updated>2019-12-28T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/28/presentation</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/28/presentation.html">&lt;p&gt;Ca y est, le blog est lancé ! 
 C’est toujours difficile de se lancer dans ce type d’aventure. Si je le fais, c’est surtout pour garder de nombreuses informations au même endroit, et pouvoir les partager.&lt;/p&gt;
 
 &lt;p&gt;On va parler ici de développement web, mais pas que !&lt;/p&gt;</content><author><name></name></author><category term="Blog" /><summary type="html">Ca y est, le blog est lancé ! C’est toujours difficile de se lancer dans ce type d’aventure. Si je le fais, c’est surtout pour garder de nombreuses informations au même endroit, et pouvoir les partager.</summary></entry></feed>
