@@ -1,4 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2020-08-17T22:03:43+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse - Mélanie B.</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Une commande slack pour avoir des astuces d’accessibilité via une API maison</title><link href="http://localhost:4000/blog/2020/08/17/tips-a11y-api-slack.html" rel="alternate" type="text/html" title="Une commande slack pour avoir des astuces d'accessibilité via une API maison" /><published>2020-08-17T00:00:00+02:00</published><updated>2020-08-17T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/08/17/tips-a11y-api-slack</id><content type="html" xml:base="http://localhost:4000/blog/2020/08/17/tips-a11y-api-slack.html">&lt;p&gt;&lt;em&gt;Cette article décrit la mise en place d’une commande pour Slack permettant d’afficher une astuce sur l’accessibilité d’après une liste de tips créée dans un Google Sheet. &lt;a href=&quot;https://github.com/MelanieMEB/api-googlesheet-slack&quot;&gt;Le code source est disponible sur Github&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2021-06-25T14:34:36+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse - Mélanie B.</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Les boutons : style et accessibilité</title><link href="http://localhost:4000/blog/2021/06/25/button-style.html" rel="alternate" type="text/html" title="Les boutons : style et accessibilité" /><published>2021-06-25T00:00:00+02:00</published><updated>2021-06-25T00:00:00+02:00</updated><id>http://localhost:4000/blog/2021/06/25/button-style</id><content type="html" xml:base="http://localhost:4000/blog/2021/06/25/button-style.html">&lt;p&gt;&lt;em&gt;Changer le style d’un bouton, c’est une action qu’on fait presque tous les jours dans le développement front. Pourtant, certains états des boutons sont souvent visuellement ignorés, et l’accessibilité de ces éléments peut être oublié. Cet article propose un rappel sur les pseudo-classes à utiliser pour les boutons et sur les règles d’accessibilité.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Cet article utilise un &lt;a href=&quot;https://codepen.io/melanie_b/pen/yLMxZXQ&quot; target=&quot;_blank&quot;&gt;exemple sur CodePen&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;modifier-le-style-dun-bouton&quot;&gt;Modifier le style d’un bouton&lt;/h1&gt;
+
+&lt;p&gt;Les boutons en HTML, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;button&amp;gt;&lt;/code&gt;, permettent d’indiquer qu’une action va avoir lieu, que l’utilisateur va interagir avec le site.
+Le style de base des boutons est rarement laissé car la plupart des sites préfèrent les personnaliser. 
+Le CSS est là pour répondre à ce besoin : il existe des pseudo-classes, parfois mal connues, pour personnaliser tous les états de ces boutons.&lt;/p&gt;
+
+&lt;h2 id=&quot;les-pseudo-classes&quot;&gt;Les pseudo-classes&lt;/h2&gt;
+&lt;p&gt;Plusieurs pseudo-classes peuvent être utilisées sur un bouton pour changer l’apparence :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;:hover&lt;/code&gt; : s’active au survol du bouton avec le pointeur (sans l’activer, sans cliquer) ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;:focus&lt;/code&gt; : cet état s’active quand l’utilisateur focus le bouton, notamment via la navigation au clavier ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;:active&lt;/code&gt; : apparait quand l’utilisateur active le bouton ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;:focus-visible&lt;/code&gt; : s’active au même moment que le focus, si le User-Agent considère que l’élément a besoin d’un focus.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Dans cet &lt;a href=&quot;https://codepen.io/melanie_b/pen/yLMxZXQ&quot; target=&quot;_blank&quot;&gt;exemple sur CodePen&lt;/a&gt;, le premier bouton vous montre les différents états possibles.&lt;/p&gt;
+
+&lt;p&gt;Quelques remarques :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Si les pseudo-classes &lt;code class=&quot;highlighter-rouge&quot;&gt;:focus&lt;/code&gt; et &lt;code class=&quot;highlighter-rouge&quot;&gt;:focus-visible&lt;/code&gt; sont indiqués, l’ordre rentrera en compte et la dernière pseudo-classe pourra écraser le style de la première ;&lt;/li&gt;
+  &lt;li&gt;La pseudo-classe &lt;code class=&quot;highlighter-rouge&quot;&gt;:focus&lt;/code&gt; va rester tant qu’on ne clique pas sur un autre élément : le style focus est donc activé à chaque vois qu’on clique/active le bouton, que ce soit par clavier ou par la souris ;&lt;/li&gt;
+  &lt;li&gt;Si vous ne souhaitez pas changer le style à la souris lorsque le bouton est dans l’état focus, mais préciser votre style lors du focus au clavier (ou d’après la configuration de l’utilisateur), il faut préciser uniquement la pseudo-class &lt;code class=&quot;highlighter-rouge&quot;&gt;:focus-visible&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Pour voir l’état &lt;code class=&quot;highlighter-rouge&quot;&gt;:active&lt;/code&gt; plus longtemps, vous pouvez sur mobile, en gardant le doigt sur le bouton.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Enfin, la deuxième partie du CodePen vous montre un tableau contenant des boutons sur chaque ligne. Cela permet de vous montrer une cinquième pseudo-classe utile :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;:focus-within&lt;/code&gt;: ce style s’active quand l’un des éléments enfants a le focus.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Dans mon exemple, il permet de surligner la ligne du tableau contenant le bouton ayant le focus.
+Attention, &lt;a href=&quot;https://caniuse.com/?search=focus-within&quot; target=&quot;_blank&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;:focus-within&lt;/code&gt; ne fonctionne pas sur tous les navigateurs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;accessibilité&quot;&gt;Accessibilité&lt;/h2&gt;
+
+&lt;p&gt;Coté accessibilité, la première question à se poser est : est-ce bien un élément &lt;code class=&quot;highlighter-rouge&quot;&gt;button&lt;/code&gt; ? Souvent, les liens et les boutons sont mélangés. 
+Les liens permettent de naviguer d’une page à une autre, il faut donc bien avoir un élément &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;, même si visuellement vous pouvez donner un style de bouton.
+Les boutons sont là pour soumettre des informations, afficher un élément, fermer une fenêtre, etc.&lt;/p&gt;
+
+&lt;p&gt;Une fois le bon tag HTML utilisé, il faut que le bouton soit explicite pour les utilisateurs.&lt;/p&gt;
+
+&lt;p&gt;Dans le cas où le bouton contient du texte :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Le texte du bouton doit exprimer explicitement l’action : “Valider ma commande”, “Fermer la fenêtre des messages”, etc. ;&lt;/li&gt;
+  &lt;li&gt;Par conséquent, les textes comme “OK”, “Cliquez-ici” ou encore “Valider” sont à éviter ;&lt;/li&gt;
+  &lt;li&gt;Si votre texte n’est pas explicite, il faut mieux ajouter un attribut &lt;code class=&quot;highlighter-rouge&quot;&gt;aria-label&lt;/code&gt; pour proposer un intitulé explicite : &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;button aria-label=&quot;Valider ma commande&quot;&amp;gt;Valider&amp;lt;/button&amp;gt;&lt;/code&gt; ;&lt;/li&gt;
+  &lt;li&gt;L’attribut &lt;code class=&quot;highlighter-rouge&quot;&gt;title&lt;/code&gt; peut aussi être utilisé mais est moins bien supporté par les navigateurs ;&lt;/li&gt;
+  &lt;li&gt;Si le texte du bouton est déjà explicite, il ne faut pas rajouter un &lt;code class=&quot;highlighter-rouge&quot;&gt;aria-label&lt;/code&gt; par dessus, et encore moins un &lt;code class=&quot;highlighter-rouge&quot;&gt;aria-label&lt;/code&gt; vide : ce dernier pourrait être lu à la place du texte qui est explicite.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Si le bouton contient une image :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Il faut que l’image qu’il contient possède un texte alternatif compréhensible ;&lt;/li&gt;
+  &lt;li&gt;Par exemple, si le bouton ne contient qu’une image (une croix) pour indiquer la fermeture d’une fenêtre : &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;button&amp;gt;&amp;lt;img src=&quot;croix.png&quot; alt=&quot;Fermer la fenêtre d'information&quot;&amp;gt;&amp;lt;/button&amp;gt;&lt;/code&gt; ;&lt;/li&gt;
+  &lt;li&gt;Si vous ne pouvez pas mettre d’attribut &lt;code class=&quot;highlighter-rouge&quot;&gt;alt&lt;/code&gt; sur votre icône, il faut alors indiquer le texte explicite dans l’attribut &lt;code class=&quot;highlighter-rouge&quot;&gt;aria-label&lt;/code&gt; du bouton.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Il faut aussi analyser le visuel de votre bouton :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Pouvoir voir le focus : si vous n’avez pas fait de style spécifique pour le focus et pour les autres états, ne retirez pas les styles par défaut du navigateur ;&lt;/li&gt;
+  &lt;li&gt;Indiquer le changement d’état par autre chose que simplement la couleur : souligner le texte, ajouter une bordure, etc. ;&lt;/li&gt;
+  &lt;li&gt;Le contraste entre le texte et le fond du bouton doit être suffisant : utilisez un &lt;a href=&quot;https://contrastchecker.com/&quot; target=&quot;_blank&quot;&gt;outils permettant de vérifier le contraste&lt;/a&gt; pour vous en assurer ;&lt;/li&gt;
+  &lt;li&gt;Le texte ne doit pas dépasser du bouton lorsque l’utilisateur change le zoom du texte de la page : utilisez le &lt;a href=&quot;https://support.mozilla.org/fr/kb/taille-police-zoom-augmenter-taille-pages#w_modifier-seulement-la-taille-du-texte&quot; target=&quot;_blank&quot;&gt;Zoom texte de Firefox&lt;/a&gt; pour vérifier que votre bouton soit toujours lisible avec un zoom à 200% du texte.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;tips-et-ressources&quot;&gt;Tips et ressources&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Pour retirer le style de base du focus de Firefox : &lt;code class=&quot;highlighter-rouge&quot;&gt;outile: none;&lt;/code&gt;, mais ne le faire que si on a prévu du style pour montrer le focus ;&lt;/li&gt;
+  &lt;li&gt;Aller sur &lt;a href=&quot;https://caniuse.com/&quot; target=&quot;_blank&quot;&gt;Can i use&lt;/a&gt; pour vérifier que les pseudo-classes fonctionnent bien sur vos navigateurs cibles ;&lt;/li&gt;
+  &lt;li&gt;N’hésitez pas à lire &lt;a href=&quot;https://www.w3.org/TR/selectors-4/#the-focus-visible-pseudo&quot; target=&quot;_blank&quot;&gt;l’heuristique de décision pour le &lt;code class=&quot;highlighter-rouge&quot;&gt;:focus-visible&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Et pour aller plus loin :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.deque.com/blog/accessible-aria-buttons/&quot;&gt;Building Accessible Buttons with ARIA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://css-tricks.com/user-facing-state/&quot;&gt;User Facing State&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/fr/docs/Web/Accessibility/ARIA/Roles/button_role&quot;&gt;Le rôle button&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;mot-de-la-fin&quot;&gt;Mot de la fin&lt;/h2&gt;
+
+&lt;p&gt;Je n’ai fait que parcourir quelques aspects des boutons, qui est un sujet bien plus vaste : bouton &lt;code class=&quot;highlighter-rouge&quot;&gt;input&lt;/code&gt;, le rôle &lt;code class=&quot;highlighter-rouge&quot;&gt;button&lt;/code&gt;, etc. 
+J’espère néanmoins que vous avez appris ou réapppris comment bien styliser un bouton pour le bien-être de tous vos utilisateurs et utilisatrices.&lt;/p&gt;</content><author><name></name></author><category term="CSS" /><summary type="html">Changer le style d’un bouton, c’est une action qu’on fait presque tous les jours dans le développement front. Pourtant, certains états des boutons sont souvent visuellement ignorés, et l’accessibilité de ces éléments peut être oublié. Cet article propose un rappel sur les pseudo-classes à utiliser pour les boutons et sur les règles d’accessibilité.</summary></entry><entry><title type="html">Une commande slack pour avoir des astuces d’accessibilité via une API maison</title><link href="http://localhost:4000/blog/2020/08/17/tips-a11y-api-slack.html" rel="alternate" type="text/html" title="Une commande slack pour avoir des astuces d'accessibilité via une API maison" /><published>2020-08-17T00:00:00+02:00</published><updated>2020-08-17T00:00:00+02:00</updated><id>http://localhost:4000/blog/2020/08/17/tips-a11y-api-slack</id><content type="html" xml:base="http://localhost:4000/blog/2020/08/17/tips-a11y-api-slack.html">&lt;p&gt;&lt;em&gt;Cette article décrit la mise en place d’une commande pour Slack permettant d’afficher une astuce sur l’accessibilité d’après une liste de tips créée dans un Google Sheet. &lt;a href=&quot;https://github.com/MelanieMEB/api-googlesheet-slack&quot;&gt;Le code source est disponible sur Github&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;dans-les-épisodes-précédents&quot;&gt;Dans les épisodes précédents…&lt;/h2&gt;
 
@@ -897,7 +984,4 @@ Et si nous souhaitons ensuite réinstaller notre Windows, nous n’avons pas la 
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo tail -c +56 /sys/firmware/acpi/tables/MSDM&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Plutôt pratique :)&lt;/p&gt;</content><author><name></name></author><category term="Windows" /><category term="Linux" /><summary type="html">Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.</summary></entry><entry><title type="html">Ouverture du blog</title><link href="http://localhost:4000/blog/2019/12/28/presentation.html" rel="alternate" type="text/html" title="Ouverture du blog" /><published>2019-12-28T00:00:00+01:00</published><updated>2019-12-28T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/28/presentation</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/28/presentation.html">&lt;p&gt;Ca y est, le blog est lancé ! 
-C’est toujours difficile de se lancer dans ce type d’aventure. Si je le fais, c’est surtout pour garder de nombreuses informations au même endroit, et pouvoir les partager.&lt;/p&gt;
-
-&lt;p&gt;On va parler ici de développement web, mais pas que !&lt;/p&gt;</content><author><name></name></author><category term="Blog" /><summary type="html">Ca y est, le blog est lancé ! C’est toujours difficile de se lancer dans ce type d’aventure. Si je le fais, c’est surtout pour garder de nombreuses informations au même endroit, et pouvoir les partager.</summary></entry></feed>
+&lt;p&gt;Plutôt pratique :)&lt;/p&gt;</content><author><name></name></author><category term="Windows" /><category term="Linux" /><summary type="html">Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.</summary></entry></feed>
