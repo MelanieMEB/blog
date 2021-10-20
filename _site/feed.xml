@@ -1,4 +1,180 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2021-06-25T14:34:36+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse - Mélanie B.</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Les boutons : style et accessibilité</title><link href="http://localhost:4000/blog/2021/06/25/button-style.html" rel="alternate" type="text/html" title="Les boutons : style et accessibilité" /><published>2021-06-25T00:00:00+02:00</published><updated>2021-06-25T00:00:00+02:00</updated><id>http://localhost:4000/blog/2021/06/25/button-style</id><content type="html" xml:base="http://localhost:4000/blog/2021/06/25/button-style.html">&lt;p&gt;&lt;em&gt;Changer le style d’un bouton, c’est une action qu’on fait presque tous les jours dans le développement front. Pourtant, certains états des boutons sont souvent visuellement ignorés, et l’accessibilité de ces éléments peut être oublié. Cet article propose un rappel sur les pseudo-classes à utiliser pour les boutons et sur les règles d’accessibilité.&lt;/em&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2021-10-24T16:20:24+02:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Blog d’une développeuse - Mélanie B.</title><subtitle>Transforme le thé en code</subtitle><entry><title type="html">Regex : allez, on essaie (enfin) de comprendre</title><link href="http://localhost:4000/blog/2021/10/20/regex-explain.html" rel="alternate" type="text/html" title="Regex : allez, on essaie (enfin) de comprendre" /><published>2021-10-20T00:00:00+02:00</published><updated>2021-10-20T00:00:00+02:00</updated><id>http://localhost:4000/blog/2021/10/20/regex-explain</id><content type="html" xml:base="http://localhost:4000/blog/2021/10/20/regex-explain.html">&lt;p&gt;&lt;em&gt;S’il y a bien quelque chose qui déroute une bonne partie des développeurs, c’est les expressions régulières, alias les regex. L’écriture des regex peut paraitre hiéroglyphique, et souvent leur explication ou utilisation se limite à un copier/coller d’une regex pour la vérification d’email. Pour remettre un peu de compréhension dans tout cela, replongeons (encore) dedans.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Retrouvez quelques exemples dans le &lt;a href=&quot;https://codepen.io/melanie_b/pen/wvqBjap&quot;&gt;CodePen&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;les-expressions-régulières&quot;&gt;Les expressions régulières&lt;/h1&gt;
+
+&lt;h2 id=&quot;pour-quoi-faire-&quot;&gt;Pour quoi faire ?&lt;/h2&gt;
+&lt;p&gt;Dans le développement web, les expressions régulières, regex, sont employées en majorité pour vérifier qu’une chaîne de caractères valide bien un motif, &lt;em&gt;pattern&lt;/em&gt;, ou pour extraire une partie de la chaine grâce à un motif. Elles peuvent être utilisées aussi dans ses outils (IDE, ligne de commande, etc.) pour chercher une chaîne de caractères dans un fichier par exemple.&lt;/p&gt;
+
+&lt;h3 id=&quot;les-regex-en-javascript&quot;&gt;Les Regex en Javascript&lt;/h3&gt;
+
+&lt;p&gt;En Javascript, il est possible de construire un objet regex de deux manières :
+&lt;code class=&quot;highlighter-rouge&quot;&gt;var regex = /motif/marqueurs&lt;/code&gt;, ou &lt;code class=&quot;highlighter-rouge&quot;&gt;var regex = new RegExp(&quot;motif&quot;, &quot;marqueurs&quot;)&lt;/code&gt;.
+Le motif correspond à la description de la chaîne de caractères recherché, les marqueurs ajoutent des indications sur comment faire cette recherche.&lt;/p&gt;
+
+&lt;p&gt;Dans cette article, nous utiliserons la première notation.&lt;/p&gt;
+
+&lt;p&gt;Pour tester qu’une chaîne, &lt;em&gt;string&lt;/em&gt;, valide bien un motif, il faut utiliser &lt;code class=&quot;highlighter-rouge&quot;&gt;regex.test(string)&lt;/code&gt;, qui renverra un booléen. Pour trouver les partie de la chaîne qui valident le motif au sein d’une chaine de caractère : &lt;code class=&quot;highlighter-rouge&quot;&gt;string.match(regex)&lt;/code&gt;. Une fois que l’on a cela, on va pouvoir voir comment écrire ces regex.&lt;/p&gt;
+
+&lt;h2 id=&quot;explications-et-exemples&quot;&gt;Explications et exemples&lt;/h2&gt;
+
+&lt;h3 id=&quot;trouver-un-ou-plusieurs-caractères&quot;&gt;Trouver un ou plusieurs caractères&lt;/h3&gt;
+
+&lt;p&gt;Lorsqu’on cherche une chaîne de caractères précises, la première question que l’on peut se poser est : dans notre motif, quel type de caractère cherchons-nous ?&lt;/p&gt;
+
+&lt;p&gt;Pour chercher des caractères, on peut :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;indiquer le mot que l’on cherche : &lt;code class=&quot;highlighter-rouge&quot;&gt;/tea/&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;ou un ensemble de caractère, quelque soit l’ordre de ces derniers (qui sera noté entre crochet &lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;), comme :
+    &lt;ul&gt;
+      &lt;li&gt;un ensemble de caractère précis, par exemple des voyelles &lt;code class=&quot;highlighter-rouge&quot;&gt;/[aeiouy]/&lt;/code&gt; ;&lt;/li&gt;
+      &lt;li&gt;des caractères entre tel ou tel caractère : &lt;code class=&quot;highlighter-rouge&quot;&gt;/[a-t]/&lt;/code&gt; : les lettres a, b, c, etc.. correspondront, jusqu’à la lettre t, donc la lettre u ne correspondra pas au motif ;&lt;/li&gt;
+      &lt;li&gt;tout sauf un ensemble de caractère, par exemple tout sauf les voyelles : &lt;code class=&quot;highlighter-rouge&quot;&gt;/[^aeiouy]/&lt;/code&gt;. Dans ce cas, le symbole &lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt; se met au début de l’ensemble et concerne bien tous les caractères de l’ensemble.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;ou encore n’importe quel caractère, avec &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt; : &lt;code class=&quot;highlighter-rouge&quot;&gt;te.&lt;/code&gt; fonctionnera pour &lt;code class=&quot;highlighter-rouge&quot;&gt;tea&lt;/code&gt;, mais aussi pour &lt;code class=&quot;highlighter-rouge&quot;&gt;teo&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;tel&lt;/code&gt;, etc. mais pas pour &lt;code class=&quot;highlighter-rouge&quot;&gt;the&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Votre caractère est un caractère utilisé dans les regex (comme &lt;code class=&quot;highlighter-rouge&quot;&gt;[&lt;/code&gt;) ? Pour cela, il faut échapper le caractère avec &lt;code class=&quot;highlighter-rouge&quot;&gt;\&lt;/code&gt; : &lt;code class=&quot;highlighter-rouge&quot;&gt;/\[/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Une fois que l’on sait quels caractères on souhaite, on peut préciser le nombre que l’on souhaite trouver :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Un ou plusieurs &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;/thé+ vert/&lt;/code&gt; validera ‘thé vert’, ‘théééé vert’, mais pas ‘th vert’ ;&lt;/li&gt;
+  &lt;li&gt;0 ou plusieurs &lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt;:  &lt;code class=&quot;highlighter-rouge&quot;&gt;/thé* vert/&lt;/code&gt; validera ‘thé vert’, ‘th vert’, ‘théééé vert’ ;&lt;/li&gt;
+  &lt;li&gt;0 ou 1 &lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt;:  &lt;code class=&quot;highlighter-rouge&quot;&gt;/thé? vert/&lt;/code&gt; validera ‘thé vert’, ‘th vert’;&lt;/li&gt;
+  &lt;li&gt;Entre 2 ou 5 &lt;code class=&quot;highlighter-rouge&quot;&gt;{min, max}&lt;/code&gt; : &lt;code class=&quot;highlighter-rouge&quot;&gt;/thé{2,5}/&lt;/code&gt; validera ‘théé’, ‘thééééé’, mais pas ‘thé’ ;&lt;/li&gt;
+  &lt;li&gt;5 ou plus &lt;code class=&quot;highlighter-rouge&quot;&gt;{min, }&lt;/code&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;/thé{5,}/&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Maximum 10 &lt;code class=&quot;highlighter-rouge&quot;&gt;{, max}&lt;/code&gt; : &lt;code class=&quot;highlighter-rouge&quot;&gt;/thé{, 10}/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Enfin, si dans votre motif, nous avons besoin de rechercher un motif ou un autre, on utilisera le symbole &lt;code class=&quot;highlighter-rouge&quot;&gt;|&lt;/code&gt;. Par exemple &lt;code class=&quot;highlighter-rouge&quot;&gt;/tea|thé/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Il existe aussi les groupes, permettant de vérifier la répétition d’un motif. Par exemple, vous voulez vérifier que la chaîne “lalalala” contient au moins un “la”, et peut en avoir plusieurs. Si on écrit &lt;code class=&quot;highlighter-rouge&quot;&gt;/la+/&lt;/code&gt;, on vérifiera les chaînes du types “laaaaaa”, le &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt; n’influent que sur la lettre “a”. Les groupes sont écrits entre parenthèse (&lt;code class=&quot;highlighter-rouge&quot;&gt;()&lt;/code&gt;), avec par exemple le motif &lt;code class=&quot;highlighter-rouge&quot;&gt;/(la)+/&lt;/code&gt; permettra de vérifier la répétition du “la”.
+&lt;em&gt;Voir la partie sur les groupes ci-dessous pour plus d’information sur ces derniers.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;les-raccourcis-pour-les-groupes-de-caractères&quot;&gt;Les raccourcis pour les groupes de caractères&lt;/h3&gt;
+
+&lt;p&gt;Il y a des ensembles de caractères attendus que l’on peut chercher régulièrement.
+Par exemple, pour tous les caractères alphanumérique, le regex sera : &lt;code class=&quot;highlighter-rouge&quot;&gt;/[A-Za-z0-9_]/&lt;/code&gt; : toutes les lettres entre A et Z, en majuscule, toutes les lettres entre a et z, en minuscule, ainsi que tous les chiffres, et le caractère &lt;code class=&quot;highlighter-rouge&quot;&gt;_&lt;/code&gt;.
+Cette regex peut être longue a écrire, et pour cela, il existe des raccourcis :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\w&lt;/code&gt; correspond aux caractères alphanumérique : &lt;code class=&quot;highlighter-rouge&quot;&gt;[A-Za-z0-9_]&lt;/code&gt;. Il ne prend pas les caractères accentués, et correspond aux caractères alphanumériques ASCII ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\W&lt;/code&gt; correspond à l’inverse de &lt;code class=&quot;highlighter-rouge&quot;&gt;\w&lt;/code&gt; et cherche tous les caractères non alphanumérique ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\d&lt;/code&gt; pour les digit &lt;code class=&quot;highlighter-rouge&quot;&gt;[0-9]&lt;/code&gt; ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\D&lt;/code&gt; pour les non-digits ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\s&lt;/code&gt; pour les espaces, tabulations, etc.. : il comprend tous les types d’espacements, comme la tabulation (&lt;code class=&quot;highlighter-rouge&quot;&gt;\t&lt;/code&gt;), ou encore les retours à la lignes (&lt;code class=&quot;highlighter-rouge&quot;&gt;\r&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;\n&lt;/code&gt;) ;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;\S&lt;/code&gt; pour les non espaces.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Globalement, ce sont des raccourcis que vous pouvez utiliser. La version en majuscule est toujours l’inverse de la version en minuscule.&lt;/p&gt;
+
+&lt;h3 id=&quot;motif-et-chaîne-complète--début-et-fin&quot;&gt;Motif et chaîne complète : début et fin&lt;/h3&gt;
+
+&lt;p&gt;Est-ce que le motif que vous cherchez est toujours en début ou en fin de chaîne ?&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;S’il doit apparaître au début, vous pouvez ajouter &lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt; au début de votre motif : &lt;code class=&quot;highlighter-rouge&quot;&gt;\^Il était une fois\&lt;/code&gt; ;&lt;/li&gt;
+  &lt;li&gt;S’il doit apparaître à la fin, vous pouvez ajouter &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt; en fin de motif : &lt;code class=&quot;highlighter-rouge&quot;&gt;\beaucoup d'enfants$\&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Cela permet de vérifier que le motif est bien présent dans la chaîne de caractères reçue, mais aussi à la bonne position. Par exemple, lorsqu’on vérifie l’email d’un utilisateur, il est mieux d’ajouter le symbole de début et de fin pour être sur que la chaîne testée ne renvoie pas true si l’utilisateur a ajouté autre chose (‘Mon mail est : monmail@mail.fr, merci.’)&lt;/p&gt;
+
+&lt;h3 id=&quot;les-marqueurs&quot;&gt;Les marqueurs&lt;/h3&gt;
+
+&lt;p&gt;Il est possible d’ajouter des marqueurs aux Regex, qui permettront de préciser comment interpréter la regex.
+Pour rappel, les marqueurs peuvent se mettre ainsi dans une regex : &lt;code class=&quot;highlighter-rouge&quot;&gt;/motif/marqueurs&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Voici quelques marqueurs :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Le marqueur &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; permet d’indiquer que la regex est insensible à la casse. La regex &lt;code class=&quot;highlighter-rouge&quot;&gt;/tea/i&lt;/code&gt; matchera avec “tea”, “TEA” ou encore “TeA”.&lt;/li&gt;
+  &lt;li&gt;Le marqueur &lt;code class=&quot;highlighter-rouge&quot;&gt;g&lt;/code&gt; fera une recherche globale&lt;/li&gt;
+  &lt;li&gt;Le marqueur &lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt; fera une recherche sur plusieurs lignes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Il existe plusieurs autres marqueurs moins utilisés.&lt;/p&gt;
+
+&lt;h3 id=&quot;trouver-les-matchs&quot;&gt;Trouver les matchs&lt;/h3&gt;
+
+&lt;p&gt;Avec les regex, nous pouvons vérifier que le motif recherché est bien présent dans la chaîne de caractères, mais aussi extraire la chaîne correspondant au motif pour pouvoir la réutiliser, avec &lt;code class=&quot;highlighter-rouge&quot;&gt;string.match(regex)&lt;/code&gt; en JS.&lt;/p&gt;
+
+&lt;p&gt;À noter lors de ce match :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Si le motif recherché est présent plusieurs fois, et que l’on souhaite récupérer toutes ses occurrences, le marqueur &lt;code class=&quot;highlighter-rouge&quot;&gt;g&lt;/code&gt; devra être ajouté, sinon seule la première occurence ressortira du match.&lt;/li&gt;
+  &lt;li&gt;Lors d’un match avec le symbole &lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt;, ou &lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;, c’est la plus longue chaine de caractère qui ressortira.
+    &lt;ul&gt;
+      &lt;li&gt;Par exemple, pour la chaine “Tralalalalalala”, le motif &lt;code class=&quot;highlighter-rouge&quot;&gt;/Tra[a-z]*la/&lt;/code&gt; matchera sur “Tralalalalalala” en entier. La chaine “Trala” pourrait aussi correspondre, mais &lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt; prendra la plus longue chaine et non la plus courte.&lt;/li&gt;
+      &lt;li&gt;Pour pouvoir récupérer la plus courte, être moins “gourmand” lors d’un match, il faut ajouter le symbole &lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt;. Par exemple, le motif utilisé serait : &lt;code class=&quot;highlighter-rouge&quot;&gt;/Tra[a-z]*?la/&lt;/code&gt; : ici, le match retournera “Trala”, le symbole &lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt; ne renvoyant que la première sous-chaine correspondant à &lt;code class=&quot;highlighter-rouge&quot;&gt;[a-z]*&lt;/code&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;les-groupes&quot;&gt;Les groupes&lt;/h4&gt;
+
+&lt;p&gt;Lors d’une recherche pour un match, on cherche parfois à extraire une partie du motif précis en plus de vérifier tout le motif. Pour cela, il y a les groupes, mis entre parenthèses &lt;code class=&quot;highlighter-rouge&quot;&gt;()&lt;/code&gt;. En plus de permettre de vérifier la répétition d’un motif, il permet d’extraire cette sous-partie.
+Par exemple, si je souhaite extraire ce motif &lt;code class=&quot;highlighter-rouge&quot;&gt;/tea|thé/&lt;/code&gt; de la phrase ‘Je bois du thé’, j’obtiendrais &lt;code class=&quot;highlighter-rouge&quot;&gt;thé&lt;/code&gt;.
+En utilisant le groupe, si je souhaite extraire le motif &lt;code class=&quot;highlighter-rouge&quot;&gt;/t(ea|hé)/&lt;/code&gt;, j’obtiendrais &lt;code class=&quot;highlighter-rouge&quot;&gt;thé&lt;/code&gt; et &lt;code class=&quot;highlighter-rouge&quot;&gt;hé&lt;/code&gt; : le groupe me sera aussi extrait.&lt;/p&gt;
+
+&lt;p&gt;Ces groupes sont numérotés, à partir de 1, et peuvent être réutilisés.
+Par exemple : &lt;code class=&quot;highlighter-rouge&quot;&gt;/(thé), \1, \1./&lt;/code&gt; cherchera la répétition du premier motif trois fois.&lt;/p&gt;
+
+&lt;p&gt;Il est aussi possible de ne pas vouloir récupérer un groupe : pour cela &lt;code class=&quot;highlighter-rouge&quot;&gt;(?...)&lt;/code&gt; vérifiera le motif qu’on indiquera à la place de &lt;code class=&quot;highlighter-rouge&quot;&gt;...&lt;/code&gt; mais ne le retournera pas.
+On peut vérifier la présence &lt;code class=&quot;highlighter-rouge&quot;&gt;(?= ...)&lt;/code&gt; ou l’absence du motif &lt;code class=&quot;highlighter-rouge&quot;&gt;(?! ...)&lt;/code&gt;.
+Un exemple :
+Le motif &lt;code class=&quot;highlighter-rouge&quot;&gt;/t(?=hé)/&lt;/code&gt; matchera avec “thé”, mais pas avec “tea”. Il renverra par contre uniquement “t”.&lt;/p&gt;
+
+&lt;p&gt;Le motif &lt;code class=&quot;highlighter-rouge&quot;&gt;/t(?!hé)/&lt;/code&gt; ne matchera pas avec “thé”, mais il matchera avec “tea”. Il renverra par contre uniquement “t” aussi dans le cas de “tea”.&lt;/p&gt;
+
+&lt;h3 id=&quot;un-exemple&quot;&gt;Un exemple&lt;/h3&gt;
+
+&lt;p&gt;Passons à un exemple d’une Regex : &lt;code class=&quot;highlighter-rouge&quot;&gt;/^[\w\-\.]+@([\w\-]+\.)+[a-z0-9]{2,4}$/&lt;/code&gt;. Ce motif représente, de façon simple et en ignorant quelques cas spécifiques, une adresse mail.
+Cette exemple sert pour expliquer les Regex, &lt;strong&gt;ne l’utilisez pas en production&lt;/strong&gt;, les regex fonctionnant pour tous les mails étant bien plus complexes.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Le premier symbole (&lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;) et le dernier (&lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt;) indique que le motif, s’il est trouvé, ne doit pas être au milieu d’autre chose : le motif représente toute l’adresse qui va être testée.&lt;/li&gt;
+  &lt;li&gt;On a ensuite un ensemble : &lt;code class=&quot;highlighter-rouge&quot;&gt;[\w\-\.]+&lt;/code&gt;. Cette ensemble contient les caractères alphanumériques (&lt;code class=&quot;highlighter-rouge&quot;&gt;\w&lt;/code&gt;), ainsi que deux caractères qu’on peut utiliser dans les adresses : le tiret (&lt;code class=&quot;highlighter-rouge&quot;&gt;\-&lt;/code&gt;) et le point (&lt;code class=&quot;highlighter-rouge&quot;&gt;\.&lt;/code&gt;) que l’on doit échapper pour qu’ils ne soient pas pris pour un symbole de regex. On souhaite enfin vérifier qu’il y aura un ou plusieurs caractères (&lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;). Le motif &lt;code class=&quot;highlighter-rouge&quot;&gt;[\w\-\.]+&lt;/code&gt; validera la première partie de l’adresse. Si l’adresse est “i.drink-tea@tea.fr”, la partie “i.drink-tea” sera validé par ce motif.&lt;/li&gt;
+  &lt;li&gt;Le symbole &lt;code class=&quot;highlighter-rouge&quot;&gt;@&lt;/code&gt; est ensuite simplement noté dans le motif : on souhaite que le symbole &lt;code class=&quot;highlighter-rouge&quot;&gt;@&lt;/code&gt; apparaisse une fois, il suffit de le noter directement.&lt;/li&gt;
+  &lt;li&gt;Enfin, la deuxième partie de l’adresse est &lt;code class=&quot;highlighter-rouge&quot;&gt;([\w\-]+\.)+[a-z0-9]{2,4}&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;([\w\-]+\.)+&lt;/code&gt; : cette partie vérifie le domaine de l’adresse, après le @. On peut avoir par exemple une adresse en “the@mon.domaine.fr”. Ce motif vérifie la partie “mon.domaine.”. Pour cela, on utilise un groupe pour pouvoir ajouter plusieurs sous-domaines (mon, domaine), qui termine toujours par un point. Le groupe (&lt;code class=&quot;highlighter-rouge&quot;&gt;([\w-]+\.)&lt;/code&gt;) contient &lt;code class=&quot;highlighter-rouge&quot;&gt;[\w\-]+&lt;/code&gt; pour indiquer qu’on souhaite un ensemble de caractère alphanumérique (et on accepte le tiret), et qu’il faut un ou plusieurs de ces caractères (&lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;). Le ‘.’ indique le point en fin de domaine. Enfin, on indique que ce groupe peut se répéter une ou plusieurs fois, avec le &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;.&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[a-z0-9]{2,4}&lt;/code&gt; : nous avons ici un ensemble de caractères que nous souhaitons trouver (&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;), les lettres minuscules de l’alphabet (&lt;code class=&quot;highlighter-rouge&quot;&gt;a-z&lt;/code&gt;) ou les chiffres (&lt;code class=&quot;highlighter-rouge&quot;&gt;0-9&lt;/code&gt;). On précise que l’on souhaite entre 2 et 4 caractères, ni plus ni moins : &lt;code class=&quot;highlighter-rouge&quot;&gt;{2,4}&lt;/code&gt;. Les extension “fr” ou “4u” seront acceptés, mais pas l’extension “FR” : car les lettres majuscules n’ont pas été précisé dans l’ensemble. Pour éviter cela, on pourrait remplacer l’ensemble par &lt;code class=&quot;highlighter-rouge&quot;&gt;\w&lt;/code&gt;, ou encore rajouter le marqueur &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; à notre regex pour ignorer la casse.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;un-jour-jarriverai-à-écrire-ces-regex-&quot;&gt;Un jour, j’arriverai à écrire ces Regex :&lt;/h2&gt;
+&lt;p&gt;En écrivant cette article, je me suis souvent dit : c’est pas si compliqué, alors qu’est-ce qui me bloque à chaque fois que je fais des regex, pourquoi ça me semble si compliqué ?
+Et en l’écrivant, j’ai aussi compris pourquoi.&lt;/p&gt;
+
+&lt;p&gt;La première raison est, sans étonnement, que plus on en fait, plus on sait faire, surtout dans le cas des Regex. Je ne les utilise pas tant que ça dans mes journées de développement, ce qui fait que j’ai une tendance à oublier. Après avoir pris le temps de les découvrir à nouveau et d’en refaire pour l’article, ça me semble moins compliqué. Mais ce sentiment sera présent jusqu’à ce que je n’y touche pas pendant des mois, et alors la prochaine pourrait être douloureuse. Face à cela, il faut que je les réutilise plus dans ma vie de dev : lors de la recherche dans des fichiers, dans des kata, etc.. On apprend en faisant, rien d’étonnant à ça.&lt;/p&gt;
+
+&lt;p&gt;Il y a également des éléments dans les regex, qui selon moi rendent leur apprentissage compliqué. Ceci est mon ressenti personnel, mais je vous les liste pour vous aider, si vous avez les mêmes, à comprendre ce qui peut bloquer parfois :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;La double utilisation du symbole &lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt;, pour indiquer le début ou pour prendre l’inverse des caractères d’un ensemble ;&lt;/li&gt;
+  &lt;li&gt;La triple utilisation du &lt;code class=&quot;highlighter-rouge&quot;&gt;?&lt;/code&gt;, pour indiquer la présence d’un ensemble de caractères, pour rendre un match moins gourmand, ou au sein d’un groupe pour ne pas le retourner ;&lt;/li&gt;
+  &lt;li&gt;La différence entre les ensembles (&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;) et les groupes (&lt;code class=&quot;highlighter-rouge&quot;&gt;()&lt;/code&gt;), que j’ai souvent mélangés ;&lt;/li&gt;
+  &lt;li&gt;Les raccourcis au milieu des ensembles :&lt;code class=&quot;highlighter-rouge&quot;&gt;\d&lt;/code&gt; pour les digit &lt;code class=&quot;highlighter-rouge&quot;&gt;[0-9]&lt;/code&gt; par exemple. À la lecture d’une regex, cette double notation possible me rend parfois la lecture difficile ;&lt;/li&gt;
+  &lt;li&gt;Le retour parfois très différent pour un match (&lt;code class=&quot;highlighter-rouge&quot;&gt;.match()&lt;/code&gt;), entre deux regex très proches, qui renvoie toutes les deux &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; lors d’un test : j’ai souvent pu utiliser &lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt; pour m’aider à créer un &lt;code class=&quot;highlighter-rouge&quot;&gt;match&lt;/code&gt;, sans voir parfois la subtilité que peut apporter par exemple les compteurs, les marqueurs ou encore les groupes lors d’un match.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Toutes ces subtilités, même si j’ai pu les apprendre à un moment, se sont parfois mélangées entre deux utilisations d’un même symbole.
+Cette article était l’occasion pour moi de réapprendre les regex et de passer au dessus de cette idée qu’ils seront toujours douloureux. L’important a vraiment été la liste ci-dessus, qui m’a permis de comprendre les blocages et de savoir sur quoi me concentrer.&lt;/p&gt;
+
+&lt;h2 id=&quot;sources-et-liens-externes-&quot;&gt;Sources et liens externes :&lt;/h2&gt;
+&lt;p&gt;Pour tester ses expressions régulières, il existe de nombreux sites :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://regexr.com/&quot;&gt;RegExr&lt;/a&gt; : très bien fait notamment pour comprendre chaque partie de la regex qui est expliqué en bas de l’écran ;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://regex101.com/&quot;&gt;Regex101&lt;/a&gt; : permet aussi une explication en direct, leur “Quick Reference” est aussi très pratique ;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.debuggex.com/&quot;&gt;Debuggex&lt;/a&gt; : propose une représentation visuelle de la regex qui peut être très pratique pour comprendre ou débugger.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Pour apprendre :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;La &lt;a href=&quot;https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Regular_Expressions&quot;&gt;documentation MDN&lt;/a&gt; sur les expressions régulières ;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/&quot;&gt;FreeCodeCamp&lt;/a&gt; a un très bon cours sur les Regex ;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://regexone.com&quot;&gt;RegexOne&lt;/a&gt; est cours étape par étape en anglais sur les regex ;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ziishaned/learn-regex/blob/master/translations/README-fr.md&quot;&gt;Page Learn Regex&lt;/a&gt;, une page github (en français) qui propose une explication rapide et claire des regex ;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Merci pour la lecture de l’article. Il manque quelques marqueurs, symboles ou autres informations sur les Regex, car cette article a été écrit comme un rappel à moi-même du fonctionnement des regex. S’il y a des manques, n’hésitez pas à parcourir les liens proposés, l’objectif n’était pas de faire un cours complet sur les regex.&lt;/em&gt;&lt;/p&gt;</content><author><name></name></author><category term="Regex" /><summary type="html">S’il y a bien quelque chose qui déroute une bonne partie des développeurs, c’est les expressions régulières, alias les regex. L’écriture des regex peut paraitre hiéroglyphique, et souvent leur explication ou utilisation se limite à un copier/coller d’une regex pour la vérification d’email. Pour remettre un peu de compréhension dans tout cela, replongeons (encore) dedans.</summary></entry><entry><title type="html">Les boutons : style et accessibilité</title><link href="http://localhost:4000/blog/2021/06/25/button-style.html" rel="alternate" type="text/html" title="Les boutons : style et accessibilité" /><published>2021-06-25T00:00:00+02:00</published><updated>2021-06-25T00:00:00+02:00</updated><id>http://localhost:4000/blog/2021/06/25/button-style</id><content type="html" xml:base="http://localhost:4000/blog/2021/06/25/button-style.html">&lt;p&gt;&lt;em&gt;Changer le style d’un bouton, c’est une action qu’on fait presque tous les jours dans le développement front. Pourtant, certains états des boutons sont souvent visuellement ignorés, et l’accessibilité de ces éléments peut être oublié. Cet article propose un rappel sur les pseudo-classes à utiliser pour les boutons et sur les règles d’accessibilité.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Cet article utilise un &lt;a href=&quot;https://codepen.io/melanie_b/pen/yLMxZXQ&quot; target=&quot;_blank&quot;&gt;exemple sur CodePen&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 
@@ -975,13 +1151,4 @@ On les écrit en les pensant de gauche à droite, mais ils sont lus de droite à
 &lt;/ul&gt;
 
 &lt;p&gt;Cet ordre contre-intuitif peut expliquer des lenteurs sur le site.
-De plus, c’est une autre raison pour créer des classes spécifiques plutôt que d’enchaîner des sélecteurs.&lt;/p&gt;</content><author><name></name></author><category term="CSS" /><summary type="html">Cet article fait suite à l’article source, et j’ai souhaité noter certaines informations que j’ai trouvé utiles.</summary></entry><entry><title type="html">Retrouver sa clé d’activation Windows sous Linux</title><link href="http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux.html" rel="alternate" type="text/html" title="Retrouver sa clé d'activation Windows sous Linux" /><published>2019-12-29T00:00:00+01:00</published><updated>2019-12-29T00:00:00+01:00</updated><id>http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux</id><content type="html" xml:base="http://localhost:4000/blog/2019/12/29/cle-windows-sous-linux.html">&lt;p&gt;Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.&lt;/p&gt;
-
-&lt;p&gt;Mais souvent aussi, on préfère passer sous une distribution Linux, et on écrase totalement le Windows installé.
-Et si nous souhaitons ensuite réinstaller notre Windows, nous n’avons pas la clé d’activation.&lt;/p&gt;
-
-&lt;p&gt;Pour récupérer la clé d’activation sous Linux, c’est possible avec cette commande :&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo tail -c +56 /sys/firmware/acpi/tables/MSDM&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Plutôt pratique :)&lt;/p&gt;</content><author><name></name></author><category term="Windows" /><category term="Linux" /><summary type="html">Souvent, lorsqu’on achète un ordinateur, un Windows est installé de base, et on paie pour cette license Windows.</summary></entry></feed>
+De plus, c’est une autre raison pour créer des classes spécifiques plutôt que d’enchaîner des sélecteurs.&lt;/p&gt;</content><author><name></name></author><category term="CSS" /><summary type="html">Cet article fait suite à l’article source, et j’ai souhaité noter certaines informations que j’ai trouvé utiles.</summary></entry></feed>
