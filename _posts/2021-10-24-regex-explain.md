@@ -6,7 +6,7 @@ feature-img: "assets/img/computer.jpg"
 ---
 
 
-_S'il y a bien quelque chose qui déroute une bonne partie des développeurs, c'est les expressions régulières, alias les regex. L'écriture des regex peut paraitre hiéroglyphique, et souvent leur explication ou utilisation se limite à un copier/coller d'une regex pour la vérification d'email. Pour remettre un peu de compréhension dans tout cela, replongeons (encore) dedans._
+_S'il y a bien quelque chose qui déroute une bonne partie des développeurs, c'est les expressions régulières, alias les regex. L'écriture des regex peut paraître hiéroglyphique, et souvent leur explication ou utilisation se limite à un copier/coller d'une regex pour la vérification d'email. Pour remettre un peu de compréhension dans tout cela, replongeons (encore) dedans._
 
 _Retrouvez quelques exemples dans le [CodePen](https://codepen.io/melanie_b/pen/wvqBjap)._
 
@@ -31,7 +31,7 @@ Pour tester qu'une chaîne, *string*, valide bien un motif, il faut utiliser `re
 
 ### Trouver un ou plusieurs caractères
 
-Lorsqu'on cherche une chaîne de caractères précises, la première question que l'on peut se poser est : dans notre motif, quel type de caractère cherchons-nous ?
+Lorsqu'on cherche une chaîne de caractères précise, la première question que l'on peut se poser est : dans notre motif, quel type de caractère cherchons-nous ?
 
 Pour chercher des caractères, on peut :
 - indiquer le mot que l'on cherche : `/tea/`
@@ -47,7 +47,7 @@ Une fois que l’on sait quels caractères on souhaite, on peut préciser le nom
 - Un ou plusieurs `+`: `/thé+ vert/` validera 'thé vert', 'théé vert', mais pas 'th vert' ;
 - 0 ou plusieurs `*`:  `/thé* vert/` validera 'thé vert', 'th vert', 'théé vert' ;
 - 0 ou 1 `?`:  `/thé? vert/` validera 'thé vert', 'th vert', mais pas 'théé vert' ;
-- Entre 2 ou 5 `{min, max}` : `/thé{2,5}/` validera 'théé', 'thééééé', mais pas 'thé' ;
+- Entre 2 et 5 `{min, max}` : `/thé{2,5}/` validera 'théé', 'thééééé', mais pas 'thé' ;
 - 5 ou plus `{min, }`: `/thé{5,}/`
 - Maximum 10 `{, max}` : `/thé{, 10}/`
 
@@ -127,7 +127,7 @@ Cette exemple sert pour expliquer les Regex, **ne l'utilisez pas en production**
 - On a ensuite un ensemble : `[\w\-\.]+`. Cette ensemble contient les caractères alphanumériques (`\w`), ainsi que deux caractères qu'on peut utiliser dans les adresses : le tiret (`\-`) et le point (`\.`) que l'on doit échapper pour qu'ils ne soient pas pris pour un symbole de regex. On souhaite enfin vérifier qu'il y aura un ou plusieurs caractères (`+`). Le motif `[\w\-\.]+` validera la première partie de l'adresse. Si l'adresse est "i.drink-tea@tea.fr", la partie "i.drink-tea" sera validé par ce motif.
 - Le symbole `@` est ensuite simplement noté dans le motif : on souhaite que le symbole `@` apparaisse une fois, il suffit de le noter directement.
 - Enfin, la deuxième partie de l'adresse est `([\w\-]+\.)+[a-z0-9]{2,4}`
-  - `([\w\-]+\.)+` : cette partie vérifie le domaine de l'adresse, après le @. On peut avoir par exemple une adresse en "the@mon.domaine.fr". Ce motif vérifie la partie "mon.domaine.". Pour cela, on utilise un groupe pour pouvoir ajouter plusieurs sous-domaines (mon, domaine), qui termine toujours par un point. Le groupe (`([\w-]+\.)`) contient `[\w\-]+` pour indiquer qu'on souhaite un ensemble de caractère alphanumérique (et on accepte le tiret), et qu'il faut un ou plusieurs de ces caractères (`+`). Le `\.` indique le point en fin de domaine. Enfin, on indique que ce groupe peut se répéter une ou plusieurs fois, avec le `+`.
+  - `([\w\-]+\.)+` : cette partie vérifie le domaine de l'adresse, après le @. On peut avoir par exemple une adresse en "the@mon.domaine.fr". Ce motif vérifie la partie "mon.domaine.". Pour cela, on utilise un groupe pour pouvoir ajouter plusieurs sous-domaines (mon, domaine), qui termine toujours par un point. Le groupe (`([\w-]+\.)`) contient `[\w\-]+` pour indiquer qu'on souhaite un ensemble de caractères alphanumériques (et on accepte le tiret), et qu'il faut un ou plusieurs de ces caractères (`+`). Le `\.` indique le point en fin de domaine. Enfin, on indique que ce groupe peut se répéter une ou plusieurs fois, avec le `+`.
   - `[a-z0-9]{2,4}` : nous avons ici un ensemble de caractères que nous souhaitons trouver (`[]`), les lettres minuscules de l'alphabet (`a-z`) ou les chiffres (`0-9`). On précise que l'on souhaite entre 2 et 4 caractères, ni plus ni moins : `{2,4}`. Les extension "fr" ou "4u" seront acceptés, mais pas l'extension "FR" : car les lettres majuscules n'ont pas été précisé dans l'ensemble. Pour éviter cela, on pourrait remplacer l'ensemble par `\w`, ou encore rajouter le marqueur `i` à notre regex pour ignorer la casse.
 
 
@@ -145,7 +145,7 @@ La première raison est, sans étonnement, que plus on en fait, plus on sait fai
 - Le retour parfois très différent pour un match (`.match()`), entre deux regex très proches, qui renvoient toutes les deux `true` lors d'un test : j'ai souvent pu utiliser `test` pour m'aider à créer un `match`, sans voir parfois la subtilité que peut apporter par exemple les compteurs, les marqueurs ou encore les groupes lors d'un match.
 
 Toutes ces subtilités, même si j'ai pu les apprendre à un moment, se sont parfois mélangées entre deux utilisations d'un même symbole.
-Cette article était l'occasion pour moi de réapprendre les regex et de passer au dessus de cette idée qu'ils seront toujours douloureux. L'important a vraiment été la liste ci-dessus, qui m'a permis de comprendre les blocages et de savoir sur quoi me concentrer.
+Cette article était l'occasion pour moi de réapprendre les regex et de passer au dessus de cette idée qu'elles seront toujours douloureuses. L'important a vraiment été la liste ci-dessus, qui m'a permis de comprendre les blocages et de savoir sur quoi me concentrer.
 
 ## Sources et liens externes
 Pour tester ses expressions régulières, il existe de nombreux sites :
